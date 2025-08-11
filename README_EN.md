@@ -1,4 +1,4 @@
-# XianLai - Admax
+# XianLai - Admax (back-end)
 
 ![](./docs/xianlai-badge.svg) ![](./docs/admax-version-badge.svg)
 
