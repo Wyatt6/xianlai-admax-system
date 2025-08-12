@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -29,7 +30,8 @@ import java.util.Map;
 @Entity
 @Table(name = "tb_iam_organization", indexes = {
         @Index(columnList = "parentId"),
-        @Index(columnList = "name", unique = true)
+        @Index(columnList = "name", unique = true),
+        @Index(columnList = "createTime")
 })
 public class Organization {
     @Id
@@ -44,6 +46,8 @@ public class Organization {
     private Boolean active = false;
     @Column
     private String description;
+    @Column
+    private Date createTime;
     @Column(nullable = false)
     private Long sortId = 0L;
     @Convert(converter = MapAndJsonConverter.class)
