@@ -1,4 +1,4 @@
-package fun.xianlai.admax.datasource.config;
+package fun.xianlai.admax.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import lombok.extern.slf4j.Slf4j;
