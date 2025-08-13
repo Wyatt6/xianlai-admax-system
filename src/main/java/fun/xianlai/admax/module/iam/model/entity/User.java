@@ -1,0 +1,55 @@
+package fun.xianlai.admax.module.iam.model.entity;
+
+import fun.xianlai.admax.util.PrimaryKeyGenerator;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Date;
+
+/**
+ * @author  Wyatt6
+ * @date    2025/8/12
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "tb_iam_user", indexes = {
+        @Index(columnList = "username", unique = true),
+        @Index(columnList = "nickname", unique = true),
+        @Index(columnList = "phone", unique = true),
+        @Index(columnList = "email", unique = true)
+})
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
+    @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
+    private Long id;
+    @Column(nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String salt;        // 加密盐
+    @Column
+    private String nickname;
+    @Column
+    private String avatar;      // 头像
+    @Column
+    private String phone;
+    @Column
+    private String email;
+    @Column(nullable = false)
+    private Boolean active = false;
+    @Column
+    private Date registryTime;  // 注册时间
+}
