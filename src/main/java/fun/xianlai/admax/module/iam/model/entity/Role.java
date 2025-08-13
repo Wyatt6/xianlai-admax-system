@@ -37,7 +37,7 @@ public class Role {
     @Column
     private String name;
     @Column(nullable = false)
-    private Boolean activated = false;
+    private Boolean active = false;
     @Column
     private String description;
     @Column(nullable = false)
