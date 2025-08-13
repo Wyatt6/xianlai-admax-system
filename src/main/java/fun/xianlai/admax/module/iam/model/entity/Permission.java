@@ -40,4 +40,6 @@ public class Permission {
     private Boolean activated = false;
     @Column
     private String description;
+    @Column(nullable = false)
+    private Long sortId = 0L;
 }
