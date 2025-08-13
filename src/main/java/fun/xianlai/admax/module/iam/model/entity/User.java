@@ -16,8 +16,10 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.Date;
 
 /**
- * @author  Wyatt6
- * @date    2025/8/12
+ * RBAC-用户
+ *
+ * @author Wyatt6
+ * @date 2025/8/12
  */
 @Data
 @NoArgsConstructor
@@ -52,4 +54,8 @@ public class User {
     private Boolean active = false;
     @Column
     private Date registryTime;  // 注册时间
+    @Column
+    private Long mainOrganizationId;    // 主组织
+    @Column
+    private Long mainPositionId;        // 主职务/岗位
 }
