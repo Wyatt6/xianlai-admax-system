@@ -1,5 +1,6 @@
 package fun.xianlai.admax.module.iam.model.entity;
 
+import fun.xianlai.admax.module.iam.model.enums.Gender;
 import fun.xianlai.admax.util.PrimaryKeyGenerator;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +29,8 @@ import java.util.Date;
 @Table(name = "tb_iam_user", indexes = {
         @Index(columnList = "username", unique = true),
         @Index(columnList = "nickname", unique = true),
+        @Index(columnList = "name"),
+        @Index(columnList = "employeeNo", unique = true),
         @Index(columnList = "phone", unique = true),
         @Index(columnList = "email", unique = true)
 })
@@ -45,7 +48,15 @@ public class User {
     @Column
     private String nickname;
     @Column
-    private String avatar;      // 头像
+    private String avatar;      // 头像（文件名）
+    @Column
+    private String name;        // 真名
+    @Column
+    private Gender gender;      // 性别
+    @Column
+    private String employeeNo;  // 工号
+    @Column
+    private String photo;       // 照片（文件名）
     @Column
     private String phone;
     @Column
