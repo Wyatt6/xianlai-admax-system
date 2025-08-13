@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * 组织/部门
+ * 部门
  *
  * @author Wyatt6
  * @date 2025/8/12
@@ -28,18 +28,18 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_iam_organization", indexes = {
+@Table(name = "tb_iam_department", indexes = {
         @Index(columnList = "parentId"),
         @Index(columnList = "name", unique = true),
         @Index(columnList = "createTime")
 })
-public class Organization {
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
     @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
     private Long id;
     @Column(nullable = false)
-    private Long parentId = 0L; // 上级组织（顶层组织时这里是0）
+    private Long parentId = 0L; // 上级部门（顶层部门时这里是0）
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)

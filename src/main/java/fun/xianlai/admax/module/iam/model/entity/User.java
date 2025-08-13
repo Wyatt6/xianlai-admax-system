@@ -66,7 +66,7 @@ public class User {
     @Column
     private Date registryTime;  // 注册时间
     @Column
-    private Long mainOrganizationId;    // 主组织
+    private Long mainDepartmentId;      // 主部门
     @Column
     private Long mainPositionId;        // 主职务/岗位
 }

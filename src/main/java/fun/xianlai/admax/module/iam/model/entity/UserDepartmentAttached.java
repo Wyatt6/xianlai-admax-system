@@ -1,6 +1,6 @@
 package fun.xianlai.admax.module.iam.model.entity;
 
-import fun.xianlai.admax.module.iam.model.entity.pk.UserOrganizationPK;
+import fun.xianlai.admax.module.iam.model.entity.pk.UserDepartmentPK;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_iam_user_organization_attached")
-@IdClass(UserOrganizationPK.class)
-public class UserOrganizationAttached {
+@Table(name = "tb_iam_user_department_attached")
+@IdClass(UserDepartmentPK.class)
+public class UserDepartmentAttached {
     @Id
     private Long userId;
     @Id
-    private Long organizationId;
+    private Long departmentId;
 }

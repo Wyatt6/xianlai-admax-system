@@ -1,6 +1,6 @@
 package fun.xianlai.admax.module.iam.repository;
 
-import fun.xianlai.admax.module.iam.model.entity.Organization;
+import fun.xianlai.admax.module.iam.model.entity.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * @date 2025/8/13
  */
 @Repository
-public interface OrganizationRepository extends JpaRepository<Organization, Long> {
+public interface DepartmentRepository extends JpaRepository<Department, Long> {
 }

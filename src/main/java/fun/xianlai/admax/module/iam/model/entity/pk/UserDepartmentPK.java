@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @date 2025/8/13
  */
 @Data
-public class UserOrganizationPK implements Serializable {
+public class UserDepartmentPK implements Serializable {
     private Long userId;
-    private Long organizationId;
+    private Long departmentId;
 }
