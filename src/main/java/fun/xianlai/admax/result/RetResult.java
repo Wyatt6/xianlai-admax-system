@@ -1,9 +1,12 @@
 package fun.xianlai.admax.result;
 
+import lombok.Getter;
+
 /**
  * @author Wyatt6
  * @date 2025/8/13
  */
+@Getter
 public class RetResult {
     private Boolean success;    // true - 成功 / false - 失败
     private DataMap data;       // 返回数据
