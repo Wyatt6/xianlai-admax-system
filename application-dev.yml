@@ -12,3 +12,6 @@ admax:
       monitor:
         username: admin
         password: admin
+    redis:
+      host: ???
+      port: ???
