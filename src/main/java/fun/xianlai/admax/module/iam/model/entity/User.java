@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -64,9 +65,14 @@ public class User {
     @Column(nullable = false)
     private Boolean active = false;
     @Column
-    private Date registryTime;  // 注册时间
+    private Date registerTime;  // 注册时间
     @Column
     private Long mainDepartmentId;      // 主部门
     @Column
     private Long mainPositionId;        // 主职务/岗位
+    // ----- 非持久化属性 -----
+    @Transient
+    private String captchaKey;  // 验证码KEY
+    @Transient
+    private String captcha;     // 验证码
 }
