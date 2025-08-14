@@ -1,5 +1,6 @@
 package fun.xianlai.admax.module.common.controller;
 
+import fun.xianlai.admax.logger.ControllerLog;
 import fun.xianlai.admax.module.common.service.CaptchaService;
 import fun.xianlai.admax.result.RetResult;
 import lombok.extern.slf4j.Slf4j;
