@@ -63,4 +63,18 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.save(record);
         log.info("成功创建新用户: id=[{}]", user.getId());
     }
+
+    @Override
+    @ServiceLog("身份验证服务")
+    public User authentication(String username, String password) {
+        log.info("输入参数: username=[{}]", username);
+
+        User user = userRepository.findByUsername(username);
+        if (user == null || !user.getPassword().equals(PasswordUtil.encode(password, user.getSalt()))) {
+            throw new SystemException("用户名或密码错误");
+        }
+
+        log.info("身份验证通过");
+        return user;
+    }
 }

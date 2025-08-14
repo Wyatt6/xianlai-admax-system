@@ -19,4 +19,14 @@ public interface UserService {
      * @return 新用户对象
      */
     void createUser(String username, String password);
+
+    /**
+     * 身份验证
+     * 若验证成功则返回用户对象
+     *
+     * @param username 用户名
+     * @param password 密码（明文）
+     * @return 用户对象
+     */
+    User authentication(String username, String password);
 }
