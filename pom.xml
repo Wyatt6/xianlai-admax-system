@@ -25,6 +25,12 @@
     <description>一个基于 Vue3+ElementPlus 和 Spring Boot 的开源、轻量的后台管理系统二次开发框架。</description>
 
     <dependencies>
+        <!-- Sa-Token身份认证框架（注意SpringBoot3的artifactId和2版本的不一样） -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot3-starter</artifactId>
+            <version>1.34.0</version>
+        </dependency>
         <!-- 验证码 -->
         <dependency>
             <groupId>com.github.penggle</groupId>
