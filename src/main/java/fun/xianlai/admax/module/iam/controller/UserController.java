@@ -96,10 +96,17 @@ public class UserController {
     @PostMapping("/resetPassword")
     public RetResult resetPassword(@RequestBody User input) {
         Assert.notNull(input, "输入数据为空");
-        Assert.hasText(input.getCaptchaKey(), "验证码KEY为空");
-        Assert.hasText(input.getCaptcha(), "验证码为空");
         Assert.hasText(input.getUsername(), "用户名为空");
         Assert.hasText(input.getPassword(), "密码为空");
+        Assert.hasText(input.getCertificate(), "凭证为空");
+
+        String username = input.getUsername();
+        String password = input.getPassword();
+        String certificate = input.getCertificate();
+        log.info("请求参数: username=[{}]", username);
+
+        // TODO 重置密码
+
         return null;
     }
 }

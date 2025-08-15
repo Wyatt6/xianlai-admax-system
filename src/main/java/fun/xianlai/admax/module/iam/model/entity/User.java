@@ -75,4 +75,6 @@ public class User {
     private String captchaKey;  // 验证码KEY
     @Transient
     private String captcha;     // 验证码
+    @Transient
+    private String certificate; // 凭证
 }
