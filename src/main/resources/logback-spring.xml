@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!-- 级别依次为（从高到低）：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
 <configuration>
-    <contextName>xianlai-admax-system</contextName>
+    <contextName>OnePlatform</contextName>
     <!--保存目录-->
     <property name="PATH" value="./log"/>
     <!--打印格式模板-->
@@ -11,7 +11,7 @@
 
     <!--控制台日志-->
     <appender name="ConsoleLog" class="ch.qos.logback.core.ConsoleAppender">
-        <!--过滤留下DEBUG及以上级别日志：DEBUG、INFO、WARN、ERROR-->
+        <!--过滤只留下ERROR级别日志-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>DEBUG</level>
         </filter>
@@ -22,7 +22,7 @@
     </appender>
     <!--文件日志-->
     <appender name="FileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--过滤留下INFO及以上级别日志：INFO、WARN、ERROR-->
+        <!--过滤留下DEBUG及以上级别日志：DEBUG、INFO、WARN、ERROR-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
