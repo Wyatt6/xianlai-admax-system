@@ -8,8 +8,8 @@ package fun.xianlai.admax.util;
  * <p>
  * PS: 算法原理解析（https://juejin.cn/post/7082669476658806792）
  *
- * @author Wyatt6
- * @date 2025/8/12
+ * @author Wyatt
+ * @date 2023/8/11
  */
 public class FakeSnowflakeUtil {
     private static final long SEQUENCE_BITS = 10L;                      // 序列号位数

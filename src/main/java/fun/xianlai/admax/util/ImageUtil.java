@@ -7,17 +7,10 @@ import java.io.IOException;
 import java.util.Base64;
 
 /**
- * @author Wyatt6
- * @date 2025/8/14
+ * @author Wyatt
+ * @date 2024/2/2
  */
 public class ImageUtil {
-    /**
-     * 图像转换为base64格式的字符串
-     *
-     * @param image     要转换的图像
-     * @param imageType 要转换的图像的类型
-     * @return base64格式字符串
-     */
     public static String bufferedImageToBase64(BufferedImage image, String imageType) throws IOException {
         if (imageType == null || imageType.isEmpty()) {
             imageType = "png";

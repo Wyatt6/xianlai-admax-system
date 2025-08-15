@@ -3,8 +3,8 @@ package fun.xianlai.admax.util;
 import java.util.UUID;
 
 /**
- * @author Wyatt6
- * @date 2025/8/14
+ * @author Wyatt
+ * @date 2024/2/4
  */
 public class PasswordUtil {
     // 生成加密盐

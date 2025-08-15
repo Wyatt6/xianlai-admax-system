@@ -10,10 +10,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @author Wyatt
- * @date 2025/8/14
+ * @date 2024/2/2
  */
-@EnableCaching
 @Configuration
+@EnableCaching
 public class RedisConfig {
     @Bean
     public RedisTemplate<String, Object> stringObjectRedisTemplate(RedisConnectionFactory factory) {

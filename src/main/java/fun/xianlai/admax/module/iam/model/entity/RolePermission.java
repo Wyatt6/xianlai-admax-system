@@ -1,17 +1,18 @@
 package fun.xianlai.admax.module.iam.model.entity;
 
-import fun.xianlai.admax.module.iam.model.entity.pk.RolePermissionPK;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import fun.xianlai.admax.module.iam.model.entity.pk.RolePermissionPK;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 
 /**
- * @author Wyatt6
- * @date 2025/8/12
+ * @author Wyatt
+ * @date 2024/1/30
  */
 @Data
 @NoArgsConstructor

@@ -1,27 +1,22 @@
 package fun.xianlai.admax.module.iam.model.entity;
 
-import fun.xianlai.admax.module.iam.model.enums.Gender;
-import fun.xianlai.admax.util.PrimaryKeyGenerator;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * RBAC-用户
- *
- * @author Wyatt6
- * @date 2025/8/12
+ * @author Wyatt
+ * @date 2024/1/30
  */
 @Data
 @NoArgsConstructor
@@ -29,52 +24,27 @@ import java.util.Date;
 @Entity
 @Table(name = "tb_iam_user", indexes = {
         @Index(columnList = "username", unique = true),
-        @Index(columnList = "nickname", unique = true),
-        @Index(columnList = "name"),
-        @Index(columnList = "employeeNo", unique = true),
         @Index(columnList = "phone", unique = true),
-        @Index(columnList = "email", unique = true)
+        @Index(columnList = "email", unique = true),
+        @Index(columnList = "createTime")
 })
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
-    @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PrimaryKeyGenerator")
+    @GenericGenerator(name = "PrimaryKeyGenerator", strategy = "fun.xianlai.admax.util.PrimaryKeyGenerator")
+    private Long id;            // 主键
     @Column(nullable = false)
-    private String username;
+    private String username;    // 用户名
     @Column(nullable = false)
-    private String password;
+    private String password;    // 密码
     @Column(nullable = false)
     private String salt;        // 加密盐
     @Column
-    private String nickname;
+    private String phone;       // 手机号码
     @Column
-    private String avatar;      // 头像（文件名）
-    @Column
-    private String name;        // 真名
-    @Column
-    private Gender gender;      // 性别
-    @Column
-    private String employeeNo;  // 工号
-    @Column
-    private String photo;       // 照片（文件名）
-    @Column
-    private String phone;
-    @Column
-    private String email;
+    private String email;       // 电子邮箱
     @Column(nullable = false)
-    private Boolean active = false;
+    private Boolean activated;  // 正常/冻结
     @Column
-    private Date registerTime;  // 注册时间
-    @Column
-    private Long mainDepartmentId;      // 主部门
-    @Column
-    private Long mainPositionId;        // 主职务/岗位
-    // ----- 非持久化属性 -----
-    @Transient
-    private String captchaKey;  // 验证码KEY
-    @Transient
-    private String captcha;     // 验证码
-    @Transient
-    private String certificate; // 凭证
+    private Date createTime;    // 创建时间
 }

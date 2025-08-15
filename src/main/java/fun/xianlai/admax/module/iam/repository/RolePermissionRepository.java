@@ -1,14 +1,16 @@
 package fun.xianlai.admax.module.iam.repository;
 
-import fun.xianlai.admax.module.iam.model.entity.RolePermission;
-import fun.xianlai.admax.module.iam.model.entity.pk.RolePermissionPK;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import fun.xianlai.admax.module.iam.model.entity.RolePermission;
 
 /**
- * @author Wyatt6
- * @date 2025/8/13
+ * @author Wyatt
+ * @date 2024/2/4
  */
 @Repository
-public interface RolePermissionRepository extends JpaRepository<RolePermission, RolePermissionPK> {
+public interface RolePermissionRepository extends JpaRepository<RolePermission, Long> {
+    void deleteByRoleId(Long roleId);
+
+    void deleteByPermissionId(Long permissionId);
 }

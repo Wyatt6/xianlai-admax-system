@@ -5,8 +5,8 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author Wyatt6
- * @date 2025/8/13
+ * @author Wyatt
+ * @date 2024/1/30
  */
 @Data
 public class RolePermissionPK implements Serializable {

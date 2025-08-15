@@ -12,30 +12,29 @@ import java.text.MessageFormat;
 import java.util.Properties;
 
 /**
- * @author Wyatt6
- * @date 2025/8/12
+ * @author Wyatt
+ * @date 2024/4/1
  */
 @Slf4j
 @Configuration
 public class DruidDataSourceConfig {
-    // 使用 Unicode 字符集
-    // 字符编码 utf8
-    // 不使用 SSL 连接
+    // 数据库名db_once
+    // 使用Unicode字符集
+    // 字符编码utf8
+    // 不使用SSL连接
     // 允许返回数据库生成的主键
     // 时区东八区
-    private static final String url = "jdbc:mysql://{0}:{1}/{2}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
+    private static final String url = "jdbc:mysql://{0}:{1}/admax?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
 
-    @Value("${admax.datasource.mysql.host}")
-    private String host;
-    @Value("${admax.datasource.mysql.port}")
+    @Value("${mysql.ip}")
+    private String ip;
+    @Value("${mysql.port}")
     private String port;
-    @Value("${admax.datasource.mysql.db}")
-    private String db;
-    @Value("${admax.datasource.mysql.username}")
+    @Value("${mysql.username}")
     private String username;
-    @Value("${admax.datasource.mysql.password}")
+    @Value("${mysql.password}")
     private String password;
-    @Value("${admax.datasource.mysql.public-key}")
+    @Value("${mysql.public-key}")
     private String publicKey;
 
     @Bean
@@ -43,10 +42,10 @@ public class DruidDataSourceConfig {
         DruidDataSource ds = new DruidDataSource();
         // 基础配置
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        ds.setUrl(MessageFormat.format(url, host, port, db));
+        ds.setUrl(MessageFormat.format(url, ip, port));
         ds.setUsername(username);
         ds.setPassword(password);
-        // Druid 配置
+        // Druid配置
         ds.setInitialSize(1);   // 初始连接数
         ds.setMaxActive(100);   // 最大活跃连接数
         ds.setMinIdle(1);       // 最小空闲连接数

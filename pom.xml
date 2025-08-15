@@ -5,37 +5,54 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
+        <version>2.7.18</version>
         <relativePath/>
     </parent>
 
+    <groupId>fun.xianlai</groupId>
+    <artifactId>xianlai-admax-system</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
     <properties>
-        <project-version>0.0.0</project-version>
         <java.version>17</java.version>
-        <spring.version>3.2.4</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <groupId>fun.xianlai</groupId>
-    <artifactId>xianlai-admax-system</artifactId>
-    <version>${project-version}</version>
-    <packaging>jar</packaging>
-    <name>xianlai-admax-system</name>
-    <description>一个基于 Vue3+ElementPlus 和 Spring Boot 的开源、轻量的后台管理系统二次开发框架。</description>
-
     <dependencies>
-        <!-- Sa-Token身份认证框架（注意SpringBoot3的artifactId和2版本的不一样） -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot3-starter</artifactId>
-            <version>1.34.0</version>
-        </dependency>
         <!-- 验证码 -->
         <dependency>
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
             <version>2.3.2</version>
+        </dependency>
+        <!-- Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Sa-Token 身份认证框架 -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>1.34.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-dao-redis-jackson</artifactId>
+            <version>1.34.0</version>
+        </dependency>
+        <!-- Spring Boot AOP面向切面编程 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!-- JSON -->
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.40</version>
         </dependency>
         <!-- Redis -->
         <dependency>
@@ -46,40 +63,24 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- Spring Boot Web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!-- Spring Boot AOP 面向切面编程 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <!-- Spring Boot JPA ORM 框架 -->
+        <!-- Spring Boot JPA ORM框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- Druid 数据库连接池 -->
+        <!-- Druid数据库连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.27</version>
+            <version>1.2.18</version>
         </dependency>
-        <!-- JDBC 驱动程序 -->
+        <!-- JDBC驱动程序 -->
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>8.4.0</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.29</version>
         </dependency>
-        <!-- JSON -->
-        <dependency>
-            <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2</artifactId>
-            <version>2.0.40</version>
-        </dependency>
-        <!-- Log4j 日志框架 -->
+        <!-- Log4J日志框架 -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -95,7 +96,7 @@
     </dependencies>
 
     <build>
-        <finalName>${artifactId}-${project-version}.jar</finalName>
+        <finalName>once</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
