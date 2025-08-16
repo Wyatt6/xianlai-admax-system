@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 主键ID生成器
  * 使用FakeSnowflakeUtil中定义的伪雪花算法
  *
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/1/30
  */
 public class PrimaryKeyGenerator extends IdentityGenerator {

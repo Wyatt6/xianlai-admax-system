@@ -16,7 +16,7 @@ import fun.xianlai.admax.module.ledger.model.constant.SubscriberInitConst;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/23
  */
 @Slf4j

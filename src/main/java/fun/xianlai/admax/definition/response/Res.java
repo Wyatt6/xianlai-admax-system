@@ -3,7 +3,7 @@ package fun.xianlai.admax.definition.response;
 import lombok.Getter;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/1/31
  */
 @Getter

@@ -3,7 +3,7 @@ package fun.xianlai.admax.definition.response;
 import java.util.HashMap;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2023/9/6
  */
 public class Map extends HashMap<String, Object> {

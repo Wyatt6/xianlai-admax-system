@@ -1,7 +1,7 @@
 package fun.xianlai.admax.module.ledger.model.constant;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/23
  */
 public class JournalInitConst {

@@ -1,7 +1,7 @@
 package fun.xianlai.admax.module.iam.model.enums;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/1/30
  */
 public enum PermissionType {

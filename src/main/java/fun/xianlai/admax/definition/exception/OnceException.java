@@ -1,7 +1,7 @@
 package fun.xianlai.admax.definition.exception;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/2
  */
 public class OnceException extends RuntimeException {

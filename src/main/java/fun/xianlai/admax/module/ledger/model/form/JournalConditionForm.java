@@ -6,7 +6,7 @@ import fun.xianlai.admax.module.ledger.model.enums.AccountType;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/23
  */
 @Data

@@ -16,7 +16,7 @@ import fun.xianlai.admax.module.content.model.form.ProfileForm;
 import fun.xianlai.admax.module.content.service.ProfileService;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/23
  */
 @Slf4j

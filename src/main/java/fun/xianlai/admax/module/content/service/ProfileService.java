@@ -4,7 +4,7 @@ package fun.xianlai.admax.module.content.service;
 import fun.xianlai.admax.module.content.model.entity.Profile;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/23
  */
 public interface ProfileService {

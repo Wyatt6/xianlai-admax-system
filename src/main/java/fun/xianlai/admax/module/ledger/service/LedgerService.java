@@ -1,7 +1,7 @@
 package fun.xianlai.admax.module.ledger.service;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/30
  */
 public interface LedgerService {

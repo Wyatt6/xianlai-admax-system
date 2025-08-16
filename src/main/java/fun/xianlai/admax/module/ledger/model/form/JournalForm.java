@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2023/10/10
  */
 @Data

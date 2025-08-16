@@ -4,7 +4,7 @@ package fun.xianlai.admax.module.content.service;
 import fun.xianlai.admax.definition.response.Map;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/2
  */
 public interface CaptchaService {

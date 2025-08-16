@@ -1,7 +1,7 @@
 package fun.xianlai.admax.module.iam.model.constant;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/3
  */
 public class RoleRedisConst {

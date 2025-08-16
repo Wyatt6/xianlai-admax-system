@@ -16,7 +16,7 @@ import javax.persistence.Table;
 /**
  * 动账渠道
  *
- * @author Wyatt
+ * @author WyattLau
  * @date 2023/10/7
  */
 @Data

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/1/30
  */
 @Data

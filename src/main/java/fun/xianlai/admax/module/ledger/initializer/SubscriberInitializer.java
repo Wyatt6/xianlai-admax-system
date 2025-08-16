@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * 记账本模块订阅者初始化类
  *
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/17
  */
 @Slf4j

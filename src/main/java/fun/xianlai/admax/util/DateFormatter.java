@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/3
  */
 public class DateFormatter {

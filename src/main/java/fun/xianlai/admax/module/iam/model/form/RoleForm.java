@@ -6,7 +6,7 @@ import fun.xianlai.admax.module.iam.model.entity.Role;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/14
  */
 @Data

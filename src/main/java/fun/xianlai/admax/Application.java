@@ -5,8 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author Wyatt
- * @date 2024/4/1
+ * @author WyattLau
  */
 @Slf4j
 @SpringBootApplication

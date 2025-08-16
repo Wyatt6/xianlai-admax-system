@@ -14,7 +14,7 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/23
  */
 @Data

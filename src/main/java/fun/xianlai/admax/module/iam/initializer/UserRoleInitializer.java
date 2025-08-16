@@ -12,7 +12,7 @@ import fun.xianlai.admax.module.iam.model.entity.UserRole;
 import fun.xianlai.admax.module.iam.repository.UserRoleRepository;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/21
  */
 @Slf4j

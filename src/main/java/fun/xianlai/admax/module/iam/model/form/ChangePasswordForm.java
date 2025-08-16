@@ -3,7 +3,7 @@ package fun.xianlai.admax.module.iam.model.form;
 import lombok.Data;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/15
  */
 @Data

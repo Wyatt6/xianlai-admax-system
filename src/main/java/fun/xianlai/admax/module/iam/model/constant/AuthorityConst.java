@@ -4,7 +4,7 @@ package fun.xianlai.admax.module.iam.model.constant;
  * 权限常量
  * 用于SaCheckRole或SaCheckPermission注解
  *
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/4
  */
 public class AuthorityConst {

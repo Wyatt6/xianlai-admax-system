@@ -3,7 +3,7 @@ package fun.xianlai.admax.util;
 import java.security.MessageDigest;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2023/6/12
  */
 public class MD5Encoder {

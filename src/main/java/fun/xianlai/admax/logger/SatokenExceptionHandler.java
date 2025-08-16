@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import fun.xianlai.admax.definition.response.Res;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/8
  */
 @Slf4j

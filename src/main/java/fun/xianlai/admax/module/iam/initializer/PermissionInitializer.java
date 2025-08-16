@@ -13,7 +13,7 @@ import fun.xianlai.admax.module.iam.repository.PermissionRepository;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/21
  */
 @Slf4j

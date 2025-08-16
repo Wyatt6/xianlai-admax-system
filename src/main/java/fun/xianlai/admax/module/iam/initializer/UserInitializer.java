@@ -14,7 +14,7 @@ import fun.xianlai.admax.util.PasswordUtil;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/21
  */
 @Slf4j

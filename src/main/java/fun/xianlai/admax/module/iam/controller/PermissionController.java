@@ -24,7 +24,7 @@ import fun.xianlai.admax.module.iam.service.PermissionService;
 import java.util.List;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/4
  */
 @Slf4j

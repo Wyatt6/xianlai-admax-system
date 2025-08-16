@@ -20,7 +20,7 @@ import java.util.Date;
 /**
  * 记账流水
  *
- * @author Wyatt
+ * @author WyattLau
  * @date 2023/10/7
  */
 @Data

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Base64;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/2
  */
 public class ImageUtil {

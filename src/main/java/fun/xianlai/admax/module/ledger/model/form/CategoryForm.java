@@ -4,7 +4,7 @@ import lombok.Data;
 import fun.xianlai.admax.module.ledger.model.entity.Category;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2023/10/9
  */
 @Data

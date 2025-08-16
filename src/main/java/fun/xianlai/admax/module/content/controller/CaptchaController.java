@@ -9,7 +9,7 @@ import fun.xianlai.admax.definition.response.Res;
 import fun.xianlai.admax.module.content.service.CaptchaService;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/2
  */
 @Slf4j

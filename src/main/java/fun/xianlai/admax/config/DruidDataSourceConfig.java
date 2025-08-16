@@ -12,7 +12,7 @@ import java.text.MessageFormat;
 import java.util.Properties;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/1
  */
 @Slf4j

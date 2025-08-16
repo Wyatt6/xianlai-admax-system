@@ -22,7 +22,7 @@ import fun.xianlai.admax.module.ledger.model.form.CategoryForm;
 import fun.xianlai.admax.module.ledger.service.CategoryService;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/18
  */
 @Slf4j

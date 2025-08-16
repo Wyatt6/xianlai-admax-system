@@ -12,7 +12,7 @@ import javax.servlet.Filter;
 import javax.servlet.Servlet;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/1
  */
 @Configuration

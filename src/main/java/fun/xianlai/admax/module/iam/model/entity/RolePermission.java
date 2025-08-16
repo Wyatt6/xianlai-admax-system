@@ -11,7 +11,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/1/30
  */
 @Data

@@ -10,7 +10,7 @@ import fun.xianlai.admax.module.content.repository.ProfileRepository;
 import fun.xianlai.admax.module.iam.model.constant.UserInitConst;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/10
  */
 @Slf4j

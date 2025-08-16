@@ -13,7 +13,7 @@ import fun.xianlai.admax.module.iam.model.entity.User;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/4
  */
 @Repository

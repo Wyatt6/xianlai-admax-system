@@ -25,7 +25,7 @@ import fun.xianlai.admax.module.ledger.service.JournalService;
 import java.math.BigDecimal;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/23
  */
 @Slf4j

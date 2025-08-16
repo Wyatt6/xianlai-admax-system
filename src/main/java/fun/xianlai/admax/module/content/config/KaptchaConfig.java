@@ -9,7 +9,7 @@ import java.util.Properties;
 
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/2
  */
 @Configuration

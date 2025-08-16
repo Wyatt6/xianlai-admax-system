@@ -6,7 +6,7 @@ import fun.xianlai.admax.module.iam.model.entity.UserRole;
 import fun.xianlai.admax.module.iam.model.entity.pk.UserRolePK;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/15
  */
 @Repository

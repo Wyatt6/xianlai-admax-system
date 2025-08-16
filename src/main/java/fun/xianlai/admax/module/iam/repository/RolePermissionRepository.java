@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import fun.xianlai.admax.module.iam.model.entity.RolePermission;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/4
  */
 @Repository

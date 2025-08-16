@@ -3,7 +3,7 @@ package fun.xianlai.admax.util;
 import java.util.UUID;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/4
  */
 public class PasswordUtil {

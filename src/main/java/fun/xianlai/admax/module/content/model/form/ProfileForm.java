@@ -4,7 +4,7 @@ import lombok.Data;
 import fun.xianlai.admax.module.content.model.entity.Profile;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/4/7
  */
 @Data

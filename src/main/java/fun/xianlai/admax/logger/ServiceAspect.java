@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/4
  */
 @Slf4j

@@ -6,7 +6,7 @@ import fun.xianlai.admax.module.ledger.model.entity.Channel;
 import java.util.List;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2023/10/7
  */
 public interface ChannelService {

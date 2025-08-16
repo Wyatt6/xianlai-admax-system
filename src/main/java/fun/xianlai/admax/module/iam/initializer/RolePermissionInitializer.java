@@ -12,7 +12,7 @@ import fun.xianlai.admax.module.iam.model.entity.RolePermission;
 import fun.xianlai.admax.module.iam.repository.RolePermissionRepository;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/3/21
  */
 @Slf4j

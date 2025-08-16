@@ -7,7 +7,7 @@ import fun.xianlai.admax.module.iam.model.enums.PermissionType;
 import java.util.Date;
 
 /**
- * @author Wyatt
+ * @author WyattLau
  * @date 2024/2/4
  */
 @Data
