@@ -17,9 +17,9 @@ import javax.servlet.Servlet;
  */
 @Configuration
 public class DruidStateMonitorConfig {
-    @Value("${druid.username}")
+    @Value("${admax.datasource.druid.monitor.username}")
     private String username;   // druid监控登录用户
-    @Value("${druid.password}")
+    @Value("${admax.datasource.druid.monitor.password}")
     private String password;   // druid监控登录密码
 
     @Bean

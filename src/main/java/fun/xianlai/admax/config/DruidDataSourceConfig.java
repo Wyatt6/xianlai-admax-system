@@ -26,15 +26,15 @@ public class DruidDataSourceConfig {
     // 时区东八区
     private static final String url = "jdbc:mysql://{0}:{1}/admax?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
 
-    @Value("${mysql.ip}")
+    @Value("${admax.datasource.mysql.ip}")
     private String ip;
-    @Value("${mysql.port}")
+    @Value("${admax.datasource.mysql.port}")
     private String port;
-    @Value("${mysql.username}")
+    @Value("${admax.datasource.mysql.username}")
     private String username;
-    @Value("${mysql.password}")
+    @Value("${admax.datasource.mysql.password}")
     private String password;
-    @Value("${mysql.public-key}")
+    @Value("${admax.datasource.mysql.public-key}")
     private String publicKey;
 
     @Bean

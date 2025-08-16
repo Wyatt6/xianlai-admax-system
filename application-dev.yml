@@ -1,0 +1,23 @@
+admax:
+  datasource:
+    mysql:
+      ip: ???
+      port: ???
+      username: admax
+      password: ???
+      public-key: ???
+    druid:
+      # 监控管理台用户密码
+      monitor:
+        username: admin
+        password: admin
+    redis:
+      host: ???
+      port: ???
+  # 初始化数据
+init:
+  super-admin:
+    username: ???
+    password: ???
+    phone: ???
+    email: ???
