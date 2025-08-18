@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <project-version>1.0.0-SNAPSHOT</project-version>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <groupId>fun.xianlai</groupId>
+    <artifactId>xianlai-admax-system</artifactId>
+    <version>${project-version}</version>
+    <packaging>jar</packaging>
+    <name>xianlai-admax-system</name>
+    <description>一个基于 Vue3+ElementPlus 和 Spring Boot 的开源、轻量的后台管理系统二次开发框架。</description>
+
+    <dependencies>
+    </dependencies>
+</project>
