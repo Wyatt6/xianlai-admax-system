@@ -14,5 +14,5 @@
 
 ## 后端技术栈
 
-![](./docs/techstack_openjdk.svg) ![](./docs/techstack_spring-boot.svg) ![](./docs/techstack_mysql.svg) ![](./docs/techstack_redis.svg) ![](./docs/techstack_sa-token.svg)
+![](./docs/techstack_openjdk.svg) ![](./docs/techstack_spring-boot.svg) ![](./docs/techstack_mysql.svg) ![](./docs/techstack_redis.svg) ![](./docs/techstack_sa-token.svg) ![](./docs/techstack_log4j.svg)
 
