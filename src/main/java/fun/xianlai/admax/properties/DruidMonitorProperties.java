@@ -1,0 +1,18 @@
+package fun.xianlai.admax.properties;
+
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author WyattLau
+ */
+@Data
+@Component
+@ConfigurationProperties("admax.datasource.druid.monitor")
+public class DruidMonitorProperties {
+    private String username = "admin";
+    private String password = "admin";
+    private String whiteList = "";
+    private String blackList = "";
+}

@@ -5,7 +5,7 @@ admax:
       port: ???
       password: ???
       public-key: ???
-    druid:
+#    druid:                                                    # Druid连接池和监控后台配置（选填）
 #      pool:                                                   # 连接池配置（选填）
 #        initial-size: 1;                                      # 初始连接数
 #        min-idle: 1;                                          # 最小空闲连接数
@@ -20,3 +20,8 @@ admax:
 #        pool-prepared-statements: false;                      # 启用PSCache（对支持游标的数据库性能提升巨大），Oracle建议开启，MySQL建议关闭
 #        max-pool-prepared-statement-per-connection-size: 50;  # 启用PSCache时有效，每个连接最多持有的PACache数量
 #        filters: "config,stat,wall,log4j";                    # 扩展插件
+#      monitor:                                                # Druid监控配置（选填）
+#        username: admin                                       # 监控管理台用户名
+#        password: admin                                       # 监控管理台密码
+#        whiteList: "ip1,ip2"                                  # 白名单，IP用逗号分隔
+#        blackList: "ip1,ip2"                                  # 黑名单，IP用逗号分隔，优先级比白名单高
