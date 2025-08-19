@@ -1,4 +1,4 @@
-package fun.xianlai.admax.config;
+package fun.xianlai.admax.configs;
 
 import com.alibaba.druid.support.jakarta.StatViewServlet;
 import com.alibaba.druid.support.jakarta.WebStatFilter;
