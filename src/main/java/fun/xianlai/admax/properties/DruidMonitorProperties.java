@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties("admax.datasource.druid.monitor")
+@ConfigurationProperties("admax.datasource.mysql.druid.monitor")
 public class DruidMonitorProperties {
     private String username = "admin";
     private String password = "admin";

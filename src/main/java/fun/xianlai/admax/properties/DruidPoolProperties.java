@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties("admax.datasource.druid.pool")
+@ConfigurationProperties("admax.datasource.mysql.druid.pool")
 public class DruidPoolProperties {
     // 详见：https://github.com/alibaba/druid/wiki/DruidDataSource%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8
     // 或：https://zhuanlan.zhihu.com/p/590960572
