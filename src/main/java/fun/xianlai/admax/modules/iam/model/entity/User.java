@@ -49,7 +49,7 @@ public class User {
     private String salt;                // 加密盐
     @Column
     private String nickname;
-    @Column
+    @Column(length = 1024)
     private String avatar;              // 头像（文件名）
     @Column
     private String name;                // 真名
@@ -57,7 +57,7 @@ public class User {
     private Gender gender;              // 性别
     @Column
     private String employeeNo;          // 工号
-    @Column
+    @Column(length = 1024)
     private String photo;               // 照片（文件名）
     @Column
     private String phone;

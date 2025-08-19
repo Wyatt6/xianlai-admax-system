@@ -37,7 +37,7 @@ public class Group {
     private String name;
     @Column(nullable = false)
     private Boolean active = false;
-    @Column
+    @Column(length = 1024)
     private String description;
     @Column(nullable = false)
     private Long sortId = 0L;

@@ -48,6 +48,6 @@ public class LoginLog {
     private String browser;
     @Column(nullable = false)
     private Boolean loginSuccess;
-    @Column
+    @Column(length = 1024)
     private String message;
 }

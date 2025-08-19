@@ -45,7 +45,7 @@ public class Position {
     private String name;
     @Column(nullable = false)
     private Boolean active = false;
-    @Column
+    @Column(length = 1024)
     private String description;
     @Column
     private Date createTime;    // 职位/岗位设立时间（不是数据记录生成时间）

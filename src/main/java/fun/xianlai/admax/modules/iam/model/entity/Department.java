@@ -44,7 +44,7 @@ public class Department {
     private String name;
     @Column(nullable = false)
     private Boolean active = false;
-    @Column
+    @Column(length = 1024)
     private String description;
     @Column
     private Date createTime;    // 部门建立时间（不是数据记录生成时间）
