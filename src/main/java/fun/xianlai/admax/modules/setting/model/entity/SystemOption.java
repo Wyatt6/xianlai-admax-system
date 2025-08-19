@@ -34,12 +34,12 @@ public class SystemOption {
     private String name;
     @Column(length = 1024)
     private String description;
+    @Column(nullable = false)
+    private Boolean builtIn = false;    // 内置参数（即Admax系统自动生成的满足运行所必须的参数，不含开发者二次开发时定义的系统参数）
+    @Column(nullable = false)
+    private Boolean editable = true;    // 是否允许修改
     @Column
-    private Boolean builtIn;        // 内置参数（即Admax系统自动生成的满足运行所必须的参数，不含开发者二次开发时定义的系统参数）
-    @Column
-    private Boolean editable;       // 是否允许修改
-    @Column
-    private String tag;             // 配置项标签（用于打标分类）
+    private String tag;                 // 配置项标签（用于打标分类）
     @Column(nullable = false)
     private Long sortId = 0L;
 }
