@@ -1,0 +1,45 @@
+package fun.xianlai.admax.modules.iam.model.entity;
+
+import fun.xianlai.admax.supports.PrimaryKeyGenerator;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+
+/**
+ * RBAC-权限
+ *
+ * @author WyattLau
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "tb_iam_permission", indexes = {
+        @Index(columnList = "identifier", unique = true),
+        @Index(columnList = "name"),
+        @Index(columnList = "sortId")
+})
+public class Permission {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
+    @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
+    private Long id;
+    @Column(nullable = false)
+    private String identifier;
+    @Column
+    private String name;
+    @Column(nullable = false)
+    private Boolean active = false;
+    @Column
+    private String description;
+    @Column(nullable = false)
+    private Long sortId = 0L;
+}

@@ -1,0 +1,56 @@
+package fun.xianlai.admax.modules.iam.model.entity;
+
+import fun.xianlai.admax.supports.MapAndJsonConverter;
+import fun.xianlai.admax.supports.PrimaryKeyGenerator;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Date;
+import java.util.Map;
+
+/**
+ * 部门
+ *
+ * @author WyattLau
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "tb_iam_department", indexes = {
+        @Index(columnList = "parentId"),
+        @Index(columnList = "name", unique = true),
+        @Index(columnList = "createTime"),
+        @Index(columnList = "sortId")
+})
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
+    @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
+    private Long id;
+    @Column(nullable = false)
+    private Long parentId = 0L; // 上级部门（当为顶层部门时这里是0）
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private Boolean active = false;
+    @Column
+    private String description;
+    @Column
+    private Date createTime;    // 部门建立时间（不是数据记录生成时间）
+    @Column(nullable = false)
+    private Long sortId = 0L;
+    @Convert(converter = MapAndJsonConverter.class)
+    @Column(columnDefinition = "json")
+    private Map<String, String> more;
+}
