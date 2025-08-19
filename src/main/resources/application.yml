@@ -1,5 +1,11 @@
 server:
   port: 8080
+spring:
+  jpa:
+    show-sql: false       # 打印当前所执行的SQL
+    open-in-view: false   # 关掉该选项可以避免会话一直挂着，提升性能
+    hibernate:
+      ddl-auto: update    # 数据库定义语句自动模式：create, create-drop, update, validate
 logging:
   config: classpath:logback-spring.xml
   # 日志级别 FATAL > ERROR > WARN > INFO > DEBUG > TRACE
