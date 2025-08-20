@@ -1,4 +1,4 @@
-package fun.xianlai.admax.modules.setting.model.entity;
+package fun.xianlai.admax.modules.common.model.entity;
 
 import fun.xianlai.admax.supports.PrimaryKeyGenerator;
 import jakarta.persistence.Column;
