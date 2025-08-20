@@ -22,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_setting_user_option", indexes = {
+@Table(name = "tb_common_user_option", indexes = {
         @Index(columnList = "userId,optionKey", unique = true),
         @Index(columnList = "userId,name"),
         @Index(columnList = "userId,tag"),

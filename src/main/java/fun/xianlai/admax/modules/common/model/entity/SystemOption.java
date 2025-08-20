@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_setting_system_option", indexes = {
+@Table(name = "tb_common_system_option", indexes = {
         @Index(columnList = "name"),
         @Index(columnList = "tag"),
         @Index(columnList = "sortId")
