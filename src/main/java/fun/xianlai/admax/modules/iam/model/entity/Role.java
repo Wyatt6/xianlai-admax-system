@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -22,6 +24,8 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "tb_iam_role", indexes = {
         @Index(columnList = "identifier", unique = true),
         @Index(columnList = "name"),
@@ -32,14 +36,19 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
     @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
     private Long id;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "varchar(255) not null")
     private String identifier;
+
     @Column
     private String name;
-    @Column(nullable = false)
-    private Boolean active = false;
+
+    @Column(columnDefinition = "bit not null default 0")
+    private Boolean active;
+
     @Column(length = 1024)
     private String description;
-    @Column(nullable = false)
-    private Long sortId = 0L;
+
+    @Column(columnDefinition = "bigint not null default 0")
+    private Long sortId;
 }

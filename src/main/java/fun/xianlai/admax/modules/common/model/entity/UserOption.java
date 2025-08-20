@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -22,6 +24,8 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "tb_common_user_option", indexes = {
         @Index(columnList = "userId,optionKey", unique = true),
         @Index(columnList = "userId,name"),
@@ -33,20 +37,28 @@ public class UserOption {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
     @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
     private Long id;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "bigint not null")
     private Long userId;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "varchar(255) not null")
     private String optionKey;
-    @Column(nullable = false, length = 1024)
+
+    @Column(columnDefinition = "varchar(1024) not null")
     private String optionValue;
-    @Column(nullable = false)
-    private Boolean active = false;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "bit not null default 0")
+    private Boolean active;
+
+    @Column(columnDefinition = "varchar(255) not null")
     private String name;
+
     @Column(length = 1024)
     private String description;
+
     @Column
     private String tag;             // 配置项标签（用于打标分类）
-    @Column(nullable = false)
-    private Long sortId = 0L;
+
+    @Column(columnDefinition = "bigint not null default 0")
+    private Long sortId;
 }

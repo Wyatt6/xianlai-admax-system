@@ -11,6 +11,8 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
@@ -24,6 +26,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "tb_iam_login_log", indexes = {
         @Index(columnList = "userId"),
         @Index(columnList = "loginTime"),
@@ -34,20 +38,28 @@ public class LoginLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
     @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
     private Long id;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "bigint not null")
     private Long userId;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "datetime not null")
     private Date loginTime;
+
     @Column
     private String ip;
+
     @Column
     private String address;
+
     @Column
     private String os;
+
     @Column
     private String browser;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "bit not null")
     private Boolean loginSuccess;
+
     @Column(length = 1024)
     private String message;
 }

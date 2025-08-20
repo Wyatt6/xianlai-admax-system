@@ -14,6 +14,8 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
@@ -28,6 +30,8 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "tb_iam_user", indexes = {
         @Index(columnList = "username", unique = true),
         @Index(columnList = "nickname", unique = true),
@@ -41,36 +45,52 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
     @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
     private Long id;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "varchar(255) not null")
     private String username;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "varchar(1024) not null")
     private String password;
-    @Column(nullable = false)
+
+    @Column(columnDefinition = "varchar(255) not null")
     private String salt;                // 加密盐
+
     @Column
     private String nickname;
+
     @Column(length = 1024)
     private String avatar;              // 头像（文件名）
+
     @Column
     private String name;                // 真名
+
     @Column
     private Gender gender;              // 性别
+
     @Column
     private String employeeNo;          // 工号
+
     @Column(length = 1024)
     private String photo;               // 照片（文件名）
+
     @Column
     private String phone;
+
     @Column
     private String email;
-    @Column(nullable = false)
-    private Boolean active = false;
+
+    @Column(columnDefinition = "bit not null default 0")
+    private Boolean active;
+
     @Column
     private Date registerTime;          // 注册时间
+
     @Column
     private Long mainDepartmentId;      // 主部门
+
     @Column
     private Long mainPositionId;        // 主职务/岗位
+
     @Convert(converter = MapAndJsonConverter.class)
     @Column(columnDefinition = "json")
     private Map<String, String> more;
