@@ -1,4 +1,4 @@
-package fun.xianlai.admax.modules.common.model.entity;
+package fun.xianlai.admax.modules.option.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 /**
- * 系统参数项
+ * 系统参数
  *
  * @author WyattLau
  */
@@ -29,10 +29,10 @@ import org.hibernate.annotations.DynamicUpdate;
 })
 public class SystemOption {
     @Id
-    private String optionKey;
+    private String optionKey;           // 参数键
 
     @Column(columnDefinition = "varchar(14000) not null")
-    private String optionValue;
+    private String optionValue;         // 参数值
 
     @Column(columnDefinition = "bit not null default 0")
     private Boolean active;
@@ -44,7 +44,7 @@ public class SystemOption {
     private String description;
 
     @Column(columnDefinition = "bit not null default 0")
-    private Boolean builtIn;            // 内置参数（即Admax系统自动生成的满足运行所必须的参数，不含开发者二次开发时定义的系统参数）
+    private Boolean builtIn;            // 内置参数（即Admax系统所必须的参数，不允许修改Key，不是开发者二次开发时定义的系统参数）
 
     @Column(columnDefinition = "bit not null default 1")
     private Boolean editable;           // 是否允许修改
