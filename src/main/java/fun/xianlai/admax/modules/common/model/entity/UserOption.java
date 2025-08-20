@@ -44,7 +44,7 @@ public class UserOption {
     @Column(columnDefinition = "varchar(255) not null")
     private String optionKey;
 
-    @Column(columnDefinition = "varchar(1024) not null")
+    @Column(columnDefinition = "varchar(14000) not null")
     private String optionValue;
 
     @Column(columnDefinition = "bit not null default 0")
