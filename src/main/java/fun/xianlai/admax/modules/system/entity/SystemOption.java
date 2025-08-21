@@ -44,7 +44,7 @@ public class SystemOption {
     private String description;
 
     @Column(columnDefinition = "bit not null default 0")
-    private Boolean builtIn;            // 内置参数（不允许修改参数Key、参数名、描述）
+    private Boolean builtIn;            // 内置参数（仅允许修改optionValue,sortId）
 
     @Column(columnDefinition = "bit not null default 1")
     private Boolean editable;           // 是否允许修改

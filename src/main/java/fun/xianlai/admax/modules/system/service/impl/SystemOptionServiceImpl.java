@@ -87,7 +87,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
                 throw new SystemException("内置参数无法删除");
             }
             if (!option.get().getEditable()) {
-                throw new SystemException("参数不允许修改，无法删除");
+                throw new SystemException("该参数不允许修改，无法删除");
             }
             soRepo.deleteById(optionKey);
             log.info("系统参数已从数据库删除");
@@ -104,12 +104,26 @@ public class SystemOptionServiceImpl implements SystemOptionService {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
         Optional<SystemOption> oldOption = soRepo.findById(option.getOptionKey());
         if (oldOption.isPresent()) {
+            if (!oldOption.get().getEditable()) {
+                throw new SystemException("该参数不允许修改");
+            }
+            if (oldOption.get().getBuiltIn()) {
+                log.info("内置参数仅允许修改optionValue、sortId，其他属性不允许修改");
+                option.setOptionKey(null);
+                option.setActive(null);
+                option.setName(null);
+                option.setDescription(null);
+                option.setBuiltIn(null);
+                option.setEditable(null);
+                option.setTag(null);
+            }
+
             SystemOption newOption = oldOption.get();
             EntityRenderUtil.renderNotNullFields(newOption, option);
-            soRepo.save(option);
+            soRepo.save(newOption);
             log.info("系统参数已更新到数据库");
             self.updateSystemOptionsCache();
-            self.updateCertainSystemOptionCache(option.getOptionKey());
+            self.updateCertainSystemOptionCache(newOption.getOptionKey());
         } else {
             throw new SystemException("参数不存在");
         }
