@@ -160,7 +160,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     public String readOptionValueForString(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         SystemOption option = self.getSystemOption(optionKey);
-        return option == null ? null : option.getOptionValue();
+        return option != null && option.getActive() ? option.getOptionValue() : null;
     }
 
     @Override
@@ -168,7 +168,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     public Integer readOptionValueForInteger(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         SystemOption option = self.getSystemOption(optionKey);
-        return option == null ? null : Integer.parseInt(option.getOptionValue());
+        return option != null && option.getActive() ? Integer.parseInt(option.getOptionValue()) : null;
     }
 
     @Override
@@ -176,7 +176,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     public Long readOptionValueForLong(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         SystemOption option = self.getSystemOption(optionKey);
-        return option == null ? null : Long.parseLong(option.getOptionValue());
+        return option != null && option.getActive() ? Long.parseLong(option.getOptionValue()) : null;
     }
 
     @Override
@@ -184,6 +184,6 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     public Boolean readOptionValueForBoolean(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         SystemOption option = self.getSystemOption(optionKey);
-        return option == null ? null : Boolean.parseBoolean(option.getOptionValue());
+        return option != null && option.getActive() ? Boolean.parseBoolean(option.getOptionValue()) : null;
     }
 }
