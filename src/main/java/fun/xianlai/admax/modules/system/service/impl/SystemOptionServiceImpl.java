@@ -143,7 +143,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     }
 
     @Override
-    @ServiceLog("根据Key获取系统参数")
+    @SimpleServiceLog("根据Key获取系统参数")
     public SystemOption getSystemOption(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         SystemOption cachedOption = (SystemOption) redis.opsForValue().get(optionKey);
@@ -153,5 +153,37 @@ public class SystemOptionServiceImpl implements SystemOptionService {
             self.updateCertainSystemOptionCache(optionKey);
             return (SystemOption) redis.opsForValue().get(optionKey);
         }
+    }
+
+    @Override
+    @SimpleServiceLog("以String类型读取系统参数值")
+    public String readOptionValueForString(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        SystemOption option = self.getSystemOption(optionKey);
+        return option == null ? null : option.getOptionValue();
+    }
+
+    @Override
+    @SimpleServiceLog("以Integer类型读取系统参数值")
+    public Integer readOptionValueForInteger(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        SystemOption option = self.getSystemOption(optionKey);
+        return option == null ? null : Integer.parseInt(option.getOptionValue());
+    }
+
+    @Override
+    @SimpleServiceLog("以Long类型读取系统参数值")
+    public Long readOptionValueForLong(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        SystemOption option = self.getSystemOption(optionKey);
+        return option == null ? null : Long.parseLong(option.getOptionValue());
+    }
+
+    @Override
+    @SimpleServiceLog("以Boolean类型读取系统参数值")
+    public Boolean readOptionValueForBoolean(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        SystemOption option = self.getSystemOption(optionKey);
+        return option == null ? null : Boolean.parseBoolean(option.getOptionValue());
     }
 }

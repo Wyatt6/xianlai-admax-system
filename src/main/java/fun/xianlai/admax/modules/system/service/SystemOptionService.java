@@ -63,4 +63,36 @@ public interface SystemOptionService {
      * @return 目标系统参数
      */
     SystemOption getSystemOption(String optionKey);
+
+    /**
+     * 以String类型读取系统参数值
+     *
+     * @param optionKey 参数Key
+     * @return String类型的值
+     */
+    String readOptionValueForString(String optionKey);
+
+    /**
+     * 以Integer类型读取系统参数值
+     *
+     * @param optionKey 参数Key
+     * @return Integer类型的值
+     */
+    Integer readOptionValueForInteger(String optionKey);
+
+    /**
+     * 以Long类型读取系统参数值
+     *
+     * @param optionKey 参数Key
+     * @return Long类型的值
+     */
+    Long readOptionValueForLong(String optionKey);
+
+    /**
+     * 以Boolean类型读取系统参数值
+     *
+     * @param optionKey 参数Key
+     * @return Boolean类型的值
+     */
+    Boolean readOptionValueForBoolean(String optionKey);
 }
