@@ -81,10 +81,21 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void removeSystemOption(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
-        soRepo.deleteById(optionKey);
-        log.info("系统参数已从数据库删除");
-        self.updateSystemOptionsCache();
-        self.removeCertainSystemOptionCache(optionKey);
+        Optional<SystemOption> option = soRepo.findById(optionKey);
+        if (option.isPresent()) {
+            if (option.get().getBuiltIn()) {
+                throw new SystemException("内置参数无法删除");
+            }
+            if (!option.get().getEditable()) {
+                throw new SystemException("参数不允许修改，无法删除");
+            }
+            soRepo.deleteById(optionKey);
+            log.info("系统参数已从数据库删除");
+            self.updateSystemOptionsCache();
+            self.removeCertainSystemOptionCache(optionKey);
+        } else {
+            throw new SystemException("参数不存在");
+        }
     }
 
     @Override
