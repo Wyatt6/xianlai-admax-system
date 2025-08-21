@@ -9,8 +9,7 @@ spring:
   jpa:
     show-sql: false                         # 打印当前所执行的SQL
     open-in-view: false                     # 关掉该选项可以避免会话一直挂着，提升性能
-    hibernate:
-      ddl-auto: update                      # 数据库定义语句自动模式：create, create-drop, update, validate
+    hibernate.ddl-auto: update              # 数据库定义语句自动模式：create, create-drop, update, validate
     defer-datasource-initialization: true   # 初始化文件data.sql在JPA建表后再执行
 logging:
   config: classpath:logback-spring.xml
