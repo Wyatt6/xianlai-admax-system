@@ -1,4 +1,4 @@
-package fun.xianlai.admax.modules.option.entity;
+package fun.xianlai.admax.modules.system.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +22,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "tb_common_system_option", indexes = {
+@Table(name = "tb_system_system_option", indexes = {
         @Index(columnList = "name"),
         @Index(columnList = "tag"),
         @Index(columnList = "sortId")
@@ -37,14 +37,14 @@ public class SystemOption {
     @Column(columnDefinition = "bit not null default 0")
     private Boolean active;
 
-    @Column(columnDefinition = "varchar(255) not null")
+    @Column
     private String name;
 
     @Column(length = 1024)
     private String description;
 
     @Column(columnDefinition = "bit not null default 0")
-    private Boolean builtIn;            // 内置参数（即Admax系统所必须的参数，不允许修改Key，不是开发者二次开发时定义的系统参数）
+    private Boolean builtIn;            // 内置参数（不允许修改参数Key、参数名、描述）
 
     @Column(columnDefinition = "bit not null default 1")
     private Boolean editable;           // 是否允许修改

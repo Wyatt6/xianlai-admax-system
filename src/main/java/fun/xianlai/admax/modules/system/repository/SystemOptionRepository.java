@@ -1,6 +1,6 @@
-package fun.xianlai.admax.modules.common.repository;
+package fun.xianlai.admax.modules.system.repository;
 
-import fun.xianlai.admax.modules.common.model.entity.SystemOption;
+import fun.xianlai.admax.modules.system.entity.SystemOption;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
