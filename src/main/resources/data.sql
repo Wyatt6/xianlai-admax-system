@@ -1,0 +1,2 @@
+INSERT IGNORE INTO tb_system_system_option(`active`, `built_in`, `editable`, `sort_id`, `tag`, `option_key`, `option_value`, `name`, `description`) VALUES (1, 1, 1, 0, 'sys', 'sys.captcha.length', '5', '验证码长度', '推荐4～6位');
+INSERT IGNORE INTO tb_system_system_option(`active`, `built_in`, `editable`, `sort_id`, `tag`, `option_key`, `option_value`, `name`, `description`) VALUES (1, 1, 1, 0, 'sys', 'sys.captcha.expireSeconds', '60', '验证码有效期', '单位：秒');
