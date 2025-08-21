@@ -1,11 +1,11 @@
-package fun.xianlai.admax.modules.common.service.impl;
+package fun.xianlai.admax.modules.system.service.impl;
 
 import fun.xianlai.admax.exception.SystemException;
 import fun.xianlai.admax.loggers.ServiceLog;
 import fun.xianlai.admax.loggers.SimpleServiceLog;
-import fun.xianlai.admax.modules.common.model.entity.SystemOption;
-import fun.xianlai.admax.modules.common.repository.SystemOptionRepository;
-import fun.xianlai.admax.modules.common.service.SystemOptionService;
+import fun.xianlai.admax.modules.system.entity.SystemOption;
+import fun.xianlai.admax.modules.system.repository.SystemOptionRepository;
+import fun.xianlai.admax.modules.system.service.SystemOptionService;
 import fun.xianlai.admax.utils.EntityRenderUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +35,9 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     private SystemOptionRepository soRepo;
 
     @Override
-    @SimpleServiceLog("更新系统参数缓存")
+    @SimpleServiceLog("更新全量系统参数缓存")
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void updateSystemOptionCache() {
+    public void updateSystemOptionsCache() {
         Sort sort = Sort.by(
                 Sort.Order.asc("sortId"),
                 Sort.Order.asc("optionKey")
@@ -47,19 +47,32 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     }
 
     @Override
+    @SimpleServiceLog("更新某个系统参数缓存")
+    public void updateCertainSystemOptionCache(String optionKey) {
+        Optional<SystemOption> option = soRepo.findById(optionKey);
+        redis.opsForValue().set(optionKey, option.orElse(null));
+    }
+
+    @Override
+    @SimpleServiceLog("删除某个系统参数缓存")
+    public void removeCertainSystemOptionCache(String optionKey) {
+        redis.delete(optionKey);
+    }
+
+    @Override
     @ServiceLog("添加系统参数")
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void addSystemOption(SystemOption option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
         Assert.notNull(option.getOptionValue(), "参数Value为空");
-        Assert.notNull(option.getName(), "参数名为空");
         Optional<SystemOption> exists = soRepo.findById(option.getOptionKey());
         if (exists.isPresent()) {
             throw new SystemException("参数Key已存在");
         } else {
             soRepo.save(option);
             log.info("系统参数已添加到数据库");
-            self.updateSystemOptionCache();
+            self.updateSystemOptionsCache();
+            self.updateCertainSystemOptionCache(option.getOptionKey());
         }
     }
 
@@ -70,7 +83,8 @@ public class SystemOptionServiceImpl implements SystemOptionService {
         Assert.hasText(optionKey, "参数Key为空");
         soRepo.deleteById(optionKey);
         log.info("系统参数已从数据库删除");
-        self.updateSystemOptionCache();
+        self.updateSystemOptionsCache();
+        self.removeCertainSystemOptionCache(optionKey);
     }
 
     @Override
@@ -83,7 +97,8 @@ public class SystemOptionServiceImpl implements SystemOptionService {
             EntityRenderUtil.renderNotNullFields(newOption, option);
             soRepo.save(option);
             log.info("系统参数已更新到数据库");
-            self.updateSystemOptionCache();
+            self.updateSystemOptionsCache();
+            self.updateCertainSystemOptionCache(option.getOptionKey());
         } else {
             throw new SystemException("参数不存在");
         }
@@ -97,7 +112,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
         if (cachedOptions != null) {
             return cachedOptions;
         } else {
-            self.updateSystemOptionCache();
+            self.updateSystemOptionsCache();
             return (List<SystemOption>) redis.opsForValue().get("systemOptions");
         }
     }
@@ -106,14 +121,12 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     @ServiceLog("根据Key获取系统参数")
     public SystemOption getSystemOption(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
-        List<SystemOption> cachedOptions = self.getAllSystemOptions();
-        if (cachedOptions != null) {
-            for (SystemOption option : cachedOptions) {
-                if (option.getOptionKey().equals(optionKey)) {
-                    return option;
-                }
-            }
+        SystemOption cachedOption = (SystemOption) redis.opsForValue().get(optionKey);
+        if (cachedOption != null) {
+            return cachedOption;
+        } else {
+            self.updateCertainSystemOptionCache(optionKey);
+            return (SystemOption) redis.opsForValue().get(optionKey);
         }
-        throw new SystemException("参数不存在");
     }
 }

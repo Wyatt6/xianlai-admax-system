@@ -1,6 +1,6 @@
-package fun.xianlai.admax.modules.common.service;
+package fun.xianlai.admax.modules.system.service;
 
-import fun.xianlai.admax.modules.common.model.entity.SystemOption;
+import fun.xianlai.admax.modules.system.entity.SystemOption;
 
 import java.util.List;
 
@@ -9,9 +9,23 @@ import java.util.List;
  */
 public interface SystemOptionService {
     /**
-     * 更新系统参数缓存
+     * 更新全量系统参数缓存
      */
-    void updateSystemOptionCache();
+    void updateSystemOptionsCache();
+
+    /**
+     * 更新某个系统参数缓存
+     *
+     * @param optionKey 要更新缓存的参数Key
+     */
+    void updateCertainSystemOptionCache(String optionKey);
+
+    /**
+     * 删除某个系统参数缓存
+     *
+     * @param optionKey 要删除缓存的参数Key
+     */
+    void removeCertainSystemOptionCache(String optionKey);
 
     /**
      * 添加系统参数
