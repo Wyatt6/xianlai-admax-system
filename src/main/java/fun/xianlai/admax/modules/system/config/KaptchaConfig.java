@@ -1,4 +1,4 @@
-package fun.xianlai.admax.modules.common.config;
+package fun.xianlai.admax.modules.system.config;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
