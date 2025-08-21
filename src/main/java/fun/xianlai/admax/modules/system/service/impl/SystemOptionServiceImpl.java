@@ -157,26 +157,26 @@ public class SystemOptionServiceImpl implements SystemOptionService {
 
     @Override
     @SimpleServiceLog("以String类型读取系统参数值")
-    public String readOptionValueForString(String optionKey) {
+    public Optional<String> readOptionValueForString(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         SystemOption option = self.getSystemOption(optionKey);
-        return option != null && option.getActive() ? option.getOptionValue() : null;
+        return option != null && option.getActive() ? option.getOptionValue().describeConstable() : Optional.empty();
     }
 
     @Override
     @SimpleServiceLog("以Integer类型读取系统参数值")
-    public Integer readOptionValueForInteger(String optionKey) {
+    public Optional<Integer> readOptionValueForInteger(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         SystemOption option = self.getSystemOption(optionKey);
-        return option != null && option.getActive() ? Integer.parseInt(option.getOptionValue()) : null;
+        return option != null && option.getActive() ? ((Integer) Integer.parseInt(option.getOptionValue())).describeConstable() : Optional.empty();
     }
 
     @Override
     @SimpleServiceLog("以Long类型读取系统参数值")
-    public Long readOptionValueForLong(String optionKey) {
+    public Optional<Long> readOptionValueForLong(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         SystemOption option = self.getSystemOption(optionKey);
-        return option != null && option.getActive() ? Long.parseLong(option.getOptionValue()) : null;
+        return option != null && option.getActive() ? ((Long) Long.parseLong(option.getOptionValue())).describeConstable() : Optional.empty();
     }
 
     @Override

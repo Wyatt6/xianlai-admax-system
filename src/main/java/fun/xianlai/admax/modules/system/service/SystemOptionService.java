@@ -3,6 +3,7 @@ package fun.xianlai.admax.modules.system.service;
 import fun.xianlai.admax.modules.system.entity.SystemOption;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author WyattLau
@@ -70,7 +71,7 @@ public interface SystemOptionService {
      * @param optionKey 参数Key
      * @return String类型的值
      */
-    String readOptionValueForString(String optionKey);
+    Optional<String> readOptionValueForString(String optionKey);
 
     /**
      * 以Integer类型读取系统参数值
@@ -78,7 +79,7 @@ public interface SystemOptionService {
      * @param optionKey 参数Key
      * @return Integer类型的值
      */
-    Integer readOptionValueForInteger(String optionKey);
+    Optional<Integer> readOptionValueForInteger(String optionKey);
 
     /**
      * 以Long类型读取系统参数值
@@ -86,7 +87,7 @@ public interface SystemOptionService {
      * @param optionKey 参数Key
      * @return Long类型的值
      */
-    Long readOptionValueForLong(String optionKey);
+    Optional<Long> readOptionValueForLong(String optionKey);
 
     /**
      * 以Boolean类型读取系统参数值
