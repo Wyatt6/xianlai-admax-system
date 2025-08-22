@@ -32,7 +32,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     @Autowired
     private SystemOptionService self;
     @Autowired
-    private SystemOptionRepository soRepo;
+    private SystemOptionRepository soRepository;
 
     @Override
     @SimpleServiceLog("更新全量系统参数缓存")
@@ -42,14 +42,14 @@ public class SystemOptionServiceImpl implements SystemOptionService {
                 Sort.Order.asc("sortId"),
                 Sort.Order.asc("optionKey")
         );
-        List<SystemOption> options = soRepo.findAll(sort);
+        List<SystemOption> options = soRepository.findAll(sort);
         redis.opsForValue().set("systemOptions", options);
     }
 
     @Override
     @SimpleServiceLog("更新某个系统参数缓存")
     public void updateCertainSystemOptionCache(String optionKey) {
-        Optional<SystemOption> option = soRepo.findById(optionKey);
+        Optional<SystemOption> option = soRepository.findById(optionKey);
         redis.opsForValue().set(optionKey, option.orElse(null));
     }
 
@@ -65,11 +65,11 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     public void addSystemOption(SystemOption option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
         Assert.notNull(option.getOptionValue(), "参数Value为空");
-        Optional<SystemOption> exists = soRepo.findById(option.getOptionKey());
+        Optional<SystemOption> exists = soRepository.findById(option.getOptionKey());
         if (exists.isPresent()) {
             throw new SystemException("参数Key已存在");
         } else {
-            soRepo.save(option);
+            soRepository.save(option);
             log.info("系统参数已添加到数据库");
             self.updateSystemOptionsCache();
             self.updateCertainSystemOptionCache(option.getOptionKey());
@@ -81,7 +81,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void removeSystemOption(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
-        Optional<SystemOption> option = soRepo.findById(optionKey);
+        Optional<SystemOption> option = soRepository.findById(optionKey);
         if (option.isPresent()) {
             if (option.get().getBuiltIn()) {
                 throw new SystemException("内置参数无法删除");
@@ -89,7 +89,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
             if (!option.get().getEditable()) {
                 throw new SystemException("该参数不允许修改，无法删除");
             }
-            soRepo.deleteById(optionKey);
+            soRepository.deleteById(optionKey);
             log.info("系统参数已从数据库删除");
             self.updateSystemOptionsCache();
             self.removeCertainSystemOptionCache(optionKey);
@@ -102,7 +102,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     @ServiceLog("修改系统参数")
     public void updateSystemOption(SystemOption option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
-        Optional<SystemOption> oldOption = soRepo.findById(option.getOptionKey());
+        Optional<SystemOption> oldOption = soRepository.findById(option.getOptionKey());
         if (oldOption.isPresent()) {
             if (!oldOption.get().getEditable()) {
                 throw new SystemException("该参数不允许修改");
@@ -120,7 +120,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
 
             SystemOption newOption = oldOption.get();
             EntityRenderUtil.renderNotNullFields(newOption, option);
-            soRepo.save(newOption);
+            soRepository.save(newOption);
             log.info("系统参数已更新到数据库");
             self.updateSystemOptionsCache();
             self.updateCertainSystemOptionCache(newOption.getOptionKey());
