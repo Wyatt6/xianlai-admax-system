@@ -25,12 +25,21 @@ public class RetResult {
         return this;
     }
 
-    // 常用于 success = false 时携带错误信息提示
+    // 常用于 success = false 时携带错误信息提示，通常会配合错误码 code 字段
     public RetResult setMessage(String message) {
         if (this.data == null) {
             this.data = new DataMap("message", message);
         } else {
             this.data.put("message", message);
+        }
+        return this;
+    }
+
+    public RetResult setSystemOptionsChecksum(String systemOptionsChecksum) {
+        if (this.data == null) {
+            this.data = new DataMap("systemOptionsChecksum", systemOptionsChecksum);
+        } else {
+            this.data.put("systemOptionsChecksum", systemOptionsChecksum);
         }
         return this;
     }
