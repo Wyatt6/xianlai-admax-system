@@ -21,10 +21,10 @@ public class SystemOptionController {
     private SystemOptionService soService;
 
     // TODO 添加访问权限
-    @ControllerLog("更新全量系统参数缓存")
-    @GetMapping("/updateSystemOptionsCache")
-    public RetResult updateSystemOptionsCache() {
-        soService.updateSystemOptionsCache();
+    @ControllerLog("更新允许前端加载的系统参数缓存")
+    @GetMapping("/updateFrontLoadSystemOptionsCache")
+    public RetResult updateFrontLoadSystemOptionsCache() {
+        soService.updateFrontLoadSystemOptionsCache();
         return new RetResult().success();
     }
 
@@ -33,6 +33,14 @@ public class SystemOptionController {
     @GetMapping("/updateCertainSystemOptionCache")
     public RetResult updateCertainSystemOptionCache(@RequestParam("key") String optionKey) {
         soService.updateCertainSystemOptionCache(optionKey);
+        return new RetResult().success();
+    }
+
+    // TODO 添加访问权限
+    @ControllerLog("删除某个系统参数缓存")
+    @GetMapping("/removeCertainSystemOptionCache")
+    public RetResult removeCertainSystemOptionCache(@RequestParam("key") String optionKey) {
+        soService.removeCertainSystemOptionCache(optionKey);
         return new RetResult().success();
     }
 }
