@@ -13,6 +13,11 @@ import org.hibernate.annotations.DynamicUpdate;
 
 /**
  * 系统参数
+ * <p>
+ * 指用于控制Admax系统或基于Admax二次开发系统运行的参数
+ * 按系统参数定义者可以分成两类：
+ *      - 内置参数：已在Admax中定义，参数数据由程序SQL自动创建，除了参数值和顺序号，其他属性都不允许修改
+ *      - 非内置参数：由开发者在二次开发中定义，参数数据由具有权限的用户通过管理台新增和管理
  *
  * @author WyattLau
  */
@@ -23,8 +28,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "tb_system_system_option", indexes = {
-        @Index(columnList = "name"),
-        @Index(columnList = "tag"),
         @Index(columnList = "sortId")
 })
 public class SystemOption {
@@ -44,13 +47,13 @@ public class SystemOption {
     private String description;
 
     @Column(columnDefinition = "bit not null default 0")
-    private Boolean builtIn;            // 内置参数（仅允许修改optionValue,sortId）
+    private Boolean builtIn;            // 内置参数（仅允许修改optionValue和sortId）
 
     @Column(columnDefinition = "bit not null default 1")
-    private Boolean editable;           // 是否允许修改
+    private Boolean editable;           // 是否允许修改（即使是内置参数也要editable才允许修改optionValue和sortId）
 
-    @Column
-    private String tag;                 // 配置项标签（用于打标分类）
+    @Column(columnDefinition = "bit not null default 0")
+    private Boolean frontLoad;          // 是否允许前端加载
 
     @Column(columnDefinition = "bigint not null default 0")
     private Long sortId;
