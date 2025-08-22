@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * @author WyattLau
  */
@@ -42,5 +44,15 @@ public class SystemOptionController {
     public RetResult removeCertainSystemOptionCache(@RequestParam("key") String optionKey) {
         soService.removeCertainSystemOptionCache(optionKey);
         return new RetResult().success();
+    }
+
+    @ControllerLog("获取允许前端访问的系统参数")
+    @GetMapping("/getSystemOptions")
+    public RetResult getSystemOptions() {
+        Map<String, String> frontLoad = soService.getFrontLoadSystemOptions();
+        String frontLoadChecksum = soService.getFrontLoadSystemOptionsChecksum();
+        return new RetResult().success()
+                .addData("systemOptions", frontLoad)
+                .addData("systemOptionsChecksum", frontLoadChecksum);
     }
 }

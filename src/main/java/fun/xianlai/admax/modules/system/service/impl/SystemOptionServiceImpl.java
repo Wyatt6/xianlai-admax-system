@@ -53,6 +53,17 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     }
 
     @Override
+    public Map<String, String> getFrontLoadSystemOptions() {
+        return (Map<String, String>) redis.opsForValue().get("systemOptions");
+    }
+
+    @Override
+    @SimpleServiceLog("获取允许前端加载的系统参数的checksum")
+    public String getFrontLoadSystemOptionsChecksum() {
+        return (String) redis.opsForValue().get("systemOptionsChecksum");
+    }
+
+    @Override
     @SimpleServiceLog("更新某个系统参数缓存")
     public void updateCertainSystemOptionCache(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");

@@ -2,6 +2,7 @@ package fun.xianlai.admax.modules.system.service;
 
 import fun.xianlai.admax.modules.system.entity.SystemOption;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -12,6 +13,16 @@ public interface SystemOptionService {
      * 更新允许前端加载的系统参数缓存（仅缓存Key和Value）
      */
     void updateFrontLoadSystemOptionsCache();
+
+    /**
+     * 获取允许前端加载的系统参数
+     */
+    Map<String, String> getFrontLoadSystemOptions();
+
+    /**
+     * 获取允许前端加载的系统参数的checksum
+     */
+    String getFrontLoadSystemOptionsChecksum();
 
     /**
      * 更新某个系统参数缓存
