@@ -1,4 +1,4 @@
-package fun.xianlai.admax.modules.system.entity;
+package fun.xianlai.admax.modules.system.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

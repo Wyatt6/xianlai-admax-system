@@ -4,7 +4,7 @@ import com.alibaba.fastjson2.JSONObject;
 import fun.xianlai.admax.exception.SystemException;
 import fun.xianlai.admax.loggers.ServiceLog;
 import fun.xianlai.admax.loggers.SimpleServiceLog;
-import fun.xianlai.admax.modules.system.entity.Option;
+import fun.xianlai.admax.modules.system.model.entity.Option;
 import fun.xianlai.admax.modules.system.repository.OptionRepository;
 import fun.xianlai.admax.modules.system.service.OptionService;
 import fun.xianlai.admax.utils.ChecksumUtil;

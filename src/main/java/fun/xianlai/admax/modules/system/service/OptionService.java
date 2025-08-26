@@ -1,6 +1,6 @@
 package fun.xianlai.admax.modules.system.service;
 
-import fun.xianlai.admax.modules.system.entity.Option;
+import fun.xianlai.admax.modules.system.model.entity.Option;
 
 import java.util.Map;
 import java.util.Optional;
