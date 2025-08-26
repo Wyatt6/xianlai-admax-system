@@ -50,9 +50,11 @@ public class SystemOptionController {
     @GetMapping("/getSystemOptions")
     public RetResult getSystemOptions() {
         Map<String, String> frontLoad = soService.getFrontLoadSystemOptions();
-        String frontLoadChecksum = soService.getFrontLoadSystemOptionsChecksum();
+        // 不需要调用getFrontLoadSystemOptionsChecksum()获取checksum
+        // 在ControllerLog中已经对每个响应自动调用并封装到data.systemOptionsChecksum
+        // String frontLoadChecksum = soService.getFrontLoadSystemOptionsChecksum();
         return new RetResult().success()
-                .addData("systemOptions", frontLoad)
-                .addData("systemOptionsChecksum", frontLoadChecksum);
+                .addData("systemOptions", frontLoad);
+                //.addData("systemOptionsChecksum", frontLoadChecksum);
     }
 }

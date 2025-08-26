@@ -53,8 +53,14 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     }
 
     @Override
+    @SimpleServiceLog("获取允许前端加载的系统参数")
     public Map<String, String> getFrontLoadSystemOptions() {
-        return (Map<String, String>) redis.opsForValue().get("systemOptions");
+        Map<String, String> options = (Map<String, String>) redis.opsForValue().get("systemOptions");
+        if (options == null) {
+            self.updateFrontLoadSystemOptionsCache();
+            options = (Map<String, String>) redis.opsForValue().get("systemOptions");
+        }
+        return options;
     }
 
     @Override
