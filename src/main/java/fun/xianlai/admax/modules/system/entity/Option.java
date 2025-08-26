@@ -27,10 +27,10 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "tb_system_system_option", indexes = {
+@Table(name = "tb_system_option", indexes = {
         @Index(columnList = "sortId")
 })
-public class SystemOption {
+public class Option {
     @Id
     private String optionKey;           // 参数键
 

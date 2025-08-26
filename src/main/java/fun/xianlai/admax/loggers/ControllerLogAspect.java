@@ -2,7 +2,7 @@ package fun.xianlai.admax.loggers;
 
 import com.alibaba.fastjson2.JSONObject;
 import fun.xianlai.admax.exception.SystemException;
-import fun.xianlai.admax.modules.system.service.SystemOptionService;
+import fun.xianlai.admax.modules.system.service.OptionService;
 import fun.xianlai.admax.supports.RetResult;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -33,7 +33,7 @@ import java.lang.reflect.Method;
 @Component
 public class ControllerLogAspect {
     @Autowired
-    SystemOptionService soService;
+    OptionService optionService;
 
     @Pointcut("@annotation(fun.xianlai.admax.loggers.ControllerLog)")
     public void pointcut() {
@@ -73,7 +73,7 @@ public class ControllerLogAspect {
             } else {
                 result.addData("code", 500).setMessage("服务器内部错误");
             }
-            result.fail().setTraceId(MDC.get("traceId")).setSystemOptionsChecksum(soService.getFrontLoadSystemOptionsChecksum());
+            result.fail().setTraceId(MDC.get("traceId")).setSystemOptionsChecksum(optionService.getFrontLoadOptionsChecksum());
             logResponseText(result);
             log.info("处理耗时: {}ms", System.currentTimeMillis() - startTimestamp);
             log.info("<<< Exit Controller {}[{}] with Exception", annotationValue, joinPoint.getSignature().getName());
@@ -90,7 +90,7 @@ public class ControllerLogAspect {
      */
     @AfterReturning(pointcut = "pointcut()", returning = "result")
     public void controllerFinished(JoinPoint joinPoint, RetResult result) {
-        result.setTraceId(MDC.get("traceId")).setSystemOptionsChecksum(soService.getFrontLoadSystemOptionsChecksum());
+        result.setTraceId(MDC.get("traceId")).setSystemOptionsChecksum(optionService.getFrontLoadOptionsChecksum());
         logResponseText(result);
     }
 

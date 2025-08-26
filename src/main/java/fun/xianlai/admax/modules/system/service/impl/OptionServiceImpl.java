@@ -4,9 +4,9 @@ import com.alibaba.fastjson2.JSONObject;
 import fun.xianlai.admax.exception.SystemException;
 import fun.xianlai.admax.loggers.ServiceLog;
 import fun.xianlai.admax.loggers.SimpleServiceLog;
-import fun.xianlai.admax.modules.system.entity.SystemOption;
-import fun.xianlai.admax.modules.system.repository.SystemOptionRepository;
-import fun.xianlai.admax.modules.system.service.SystemOptionService;
+import fun.xianlai.admax.modules.system.entity.Option;
+import fun.xianlai.admax.modules.system.repository.OptionRepository;
+import fun.xianlai.admax.modules.system.service.OptionService;
 import fun.xianlai.admax.utils.ChecksumUtil;
 import fun.xianlai.admax.utils.EntityRenderUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -28,23 +28,23 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
-public class SystemOptionServiceImpl implements SystemOptionService {
+public class OptionServiceImpl implements OptionService {
     @Autowired
     private RedisTemplate<String, Object> redis;
     @Lazy
     @Autowired
-    private SystemOptionService self;
+    private OptionService self;
     @Autowired
-    private SystemOptionRepository soRepository;
+    private OptionRepository soRepository;
 
     @Override
     @SimpleServiceLog("更新允许前端加载的系统参数缓存")
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void updateFrontLoadSystemOptionsCache() {
-        List<SystemOption> options = soRepository.findByActiveAndFrontLoad(true, true);
+    public void updateFrontLoadOptionsCache() {
+        List<Option> options = soRepository.findByActiveAndFrontLoad(true, true);
         Map<String, String> mapOptions = new HashMap<>();
         if (options != null) {
-            for (SystemOption option : options) {
+            for (Option option : options) {
                 mapOptions.put(option.getOptionKey(), option.getOptionValue());
             }
         }
@@ -54,10 +54,10 @@ public class SystemOptionServiceImpl implements SystemOptionService {
 
     @Override
     @SimpleServiceLog("获取允许前端加载的系统参数")
-    public Map<String, String> getFrontLoadSystemOptions() {
+    public Map<String, String> getFrontLoadOptions() {
         Map<String, String> options = (Map<String, String>) redis.opsForValue().get("systemOptions");
         if (options == null) {
-            self.updateFrontLoadSystemOptionsCache();
+            self.updateFrontLoadOptionsCache();
             options = (Map<String, String>) redis.opsForValue().get("systemOptions");
         }
         return options;
@@ -65,15 +65,15 @@ public class SystemOptionServiceImpl implements SystemOptionService {
 
     @Override
     @SimpleServiceLog("获取允许前端加载的系统参数的checksum")
-    public String getFrontLoadSystemOptionsChecksum() {
+    public String getFrontLoadOptionsChecksum() {
         return (String) redis.opsForValue().get("systemOptionsChecksum");
     }
 
     @Override
     @SimpleServiceLog("更新某个系统参数缓存")
-    public void updateCertainSystemOptionCache(String optionKey) {
+    public void updateCertainOptionCache(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
-        Optional<SystemOption> option = soRepository.findByOptionKeyAndActive(optionKey, true);
+        Optional<Option> option = soRepository.findByOptionKeyAndActive(optionKey, true);
         redis.delete(optionKey);
         if (option.isPresent()) {
             redis.opsForValue().set(optionKey, option.get().getOptionValue());
@@ -82,7 +82,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
 
     @Override
     @SimpleServiceLog("删除某个系统参数缓存")
-    public void removeCertainSystemOptionCache(String optionKey) {
+    public void removeCertainOptionCache(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         redis.delete(optionKey);
     }
@@ -90,18 +90,18 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     @Override
     @ServiceLog("添加系统参数")
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void addSystemOption(SystemOption option) {
+    public void addOption(Option option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
         Assert.notNull(option.getOptionValue(), "参数Value为空");
-        Optional<SystemOption> exists = soRepository.findById(option.getOptionKey());
+        Optional<Option> exists = soRepository.findById(option.getOptionKey());
         if (exists.isPresent()) {
             throw new SystemException("参数Key已存在");
         } else {
             soRepository.save(option);
             log.info("系统参数已添加到数据库");
-            self.updateCertainSystemOptionCache(option.getOptionKey());
+            self.updateCertainOptionCache(option.getOptionKey());
             if (option.getFrontLoad()) {
-                self.updateFrontLoadSystemOptionsCache();
+                self.updateFrontLoadOptionsCache();
             }
         }
     }
@@ -109,9 +109,9 @@ public class SystemOptionServiceImpl implements SystemOptionService {
     @Override
     @ServiceLog("删除系统参项")
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void removeSystemOption(String optionKey) {
+    public void removeOption(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
-        Optional<SystemOption> option = soRepository.findById(optionKey);
+        Optional<Option> option = soRepository.findById(optionKey);
         if (option.isPresent()) {
             if (option.get().getBuiltIn()) {
                 throw new SystemException("内置参数无法删除");
@@ -121,9 +121,9 @@ public class SystemOptionServiceImpl implements SystemOptionService {
             }
             soRepository.deleteById(optionKey);
             log.info("系统参数已从数据库删除");
-            self.removeCertainSystemOptionCache(optionKey);
+            self.removeCertainOptionCache(optionKey);
             if (option.get().getFrontLoad()) {
-                self.updateFrontLoadSystemOptionsCache();
+                self.updateFrontLoadOptionsCache();
             }
         } else {
             throw new SystemException("参数不存在");
@@ -132,9 +132,9 @@ public class SystemOptionServiceImpl implements SystemOptionService {
 
     @Override
     @ServiceLog("修改系统参数")
-    public void updateSystemOption(SystemOption option) {
+    public void updateOption(Option option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
-        Optional<SystemOption> oldOption = soRepository.findById(option.getOptionKey());
+        Optional<Option> oldOption = soRepository.findById(option.getOptionKey());
         if (oldOption.isPresent()) {
             if (!oldOption.get().getEditable()) {
                 throw new SystemException("该参数不允许修改");
@@ -149,13 +149,13 @@ public class SystemOptionServiceImpl implements SystemOptionService {
                 option.setEditable(null);
                 option.setFrontLoad(null);
             }
-            SystemOption newOption = oldOption.get();
+            Option newOption = oldOption.get();
             EntityRenderUtil.renderNotNullFields(newOption, option);
             soRepository.save(newOption);
             log.info("系统参数已更新到数据库");
-            self.updateCertainSystemOptionCache(newOption.getOptionKey());
+            self.updateCertainOptionCache(newOption.getOptionKey());
             if (newOption.getFrontLoad()) {
-                self.updateFrontLoadSystemOptionsCache();
+                self.updateFrontLoadOptionsCache();
             }
         } else {
             throw new SystemException("参数不存在");
@@ -170,7 +170,7 @@ public class SystemOptionServiceImpl implements SystemOptionService {
         if (value != null) {
             return value;
         } else {
-            self.updateCertainSystemOptionCache(optionKey);
+            self.updateCertainOptionCache(optionKey);
             return (String) redis.opsForValue().get(optionKey);
         }
     }

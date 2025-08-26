@@ -6,7 +6,7 @@ import com.google.code.kaptcha.util.Config;
 import fun.xianlai.admax.exception.SystemException;
 import fun.xianlai.admax.loggers.ServiceLog;
 import fun.xianlai.admax.modules.system.service.CaptchaService;
-import fun.xianlai.admax.modules.system.service.SystemOptionService;
+import fun.xianlai.admax.modules.system.service.OptionService;
 import fun.xianlai.admax.supports.DataMap;
 import fun.xianlai.admax.utils.ImageUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class CaptchaServiceImpl implements CaptchaService {
     @Autowired
     private RedisTemplate<String, Object> redis;
     @Autowired
-    private SystemOptionService soService;
+    private OptionService optionService;
     @Lazy
     @Autowired
     private CaptchaService self;
@@ -70,8 +70,8 @@ public class CaptchaServiceImpl implements CaptchaService {
     @ServiceLog("生成验证码")
     public DataMap generateCaptcha() {
         try {
-            Integer length = soService.readOptionValueForInteger("sys.captcha.length").orElse(5);
-            Integer expireSeconds = soService.readOptionValueForInteger("sys.captcha.expireSeconds").orElse(60);
+            Integer length = optionService.readOptionValueForInteger("sys.captcha.length").orElse(5);
+            Integer expireSeconds = optionService.readOptionValueForInteger("sys.captcha.expireSeconds").orElse(60);
 
             Producer producer = getKaptchaProducer(String.valueOf(length));
             // 生成验证码KEY、验证码文本，并缓存到Redis

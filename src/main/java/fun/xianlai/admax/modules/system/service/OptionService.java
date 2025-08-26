@@ -1,6 +1,6 @@
 package fun.xianlai.admax.modules.system.service;
 
-import fun.xianlai.admax.modules.system.entity.SystemOption;
+import fun.xianlai.admax.modules.system.entity.Option;
 
 import java.util.Map;
 import java.util.Optional;
@@ -8,48 +8,48 @@ import java.util.Optional;
 /**
  * @author WyattLau
  */
-public interface SystemOptionService {
+public interface OptionService {
     /**
      * 更新允许前端加载的系统参数缓存（仅缓存Key和Value）
      */
-    void updateFrontLoadSystemOptionsCache();
+    void updateFrontLoadOptionsCache();
 
     /**
      * 获取允许前端加载的系统参数
      */
-    Map<String, String> getFrontLoadSystemOptions();
+    Map<String, String> getFrontLoadOptions();
 
     /**
      * 获取允许前端加载的系统参数的checksum
      */
-    String getFrontLoadSystemOptionsChecksum();
+    String getFrontLoadOptionsChecksum();
 
     /**
      * 更新某个系统参数缓存
      */
-    void updateCertainSystemOptionCache(String optionKey);
+    void updateCertainOptionCache(String optionKey);
 
     /**
      * 删除某个系统参数缓存
      */
-    void removeCertainSystemOptionCache(String optionKey);
+    void removeCertainOptionCache(String optionKey);
 
     /**
      * 添加系统参数
      */
-    void addSystemOption(SystemOption option);
+    void addOption(Option option);
 
     /**
      * 删除系统参数
      */
-    void removeSystemOption(String optionKey);
+    void removeOption(String optionKey);
 
     /**
      * 修改系统参数
      *
      * @param option 参数Key必须，其他要修改的属性非空
      */
-    void updateSystemOption(SystemOption option);
+    void updateOption(Option option);
 
     /**
      * 根据Key获取系统参数值
