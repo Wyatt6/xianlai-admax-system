@@ -4,7 +4,7 @@ spring:
   sql:
     init:
       mode: always                          # 启用sql初始化模式
-      data-locations: classpath:data.sql    # 用于初始化写入数据的sql文件
+      data-locations: classpath:data-*.sql  # 用于初始化写入数据的sql文件
       continue-on-error: false
   jpa:
     show-sql: false                         # 打印当前所执行的SQL
