@@ -4,9 +4,12 @@ import fun.xianlai.admax.modules.system.model.entity.Api;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author WyattLau
  */
 @Repository
 public interface ApiRepository extends JpaRepository<Api, Long> {
+    List<Api> findByActive(Boolean active);
 }
