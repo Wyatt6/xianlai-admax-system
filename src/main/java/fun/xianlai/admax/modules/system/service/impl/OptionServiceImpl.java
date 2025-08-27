@@ -35,13 +35,13 @@ public class OptionServiceImpl implements OptionService {
     @Autowired
     private OptionService self;
     @Autowired
-    private OptionRepository soRepository;
+    private OptionRepository optionRepository;
 
     @Override
     @SimpleServiceLog("更新允许前端加载的系统参数缓存")
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void updateFrontLoadOptionsCache() {
-        List<Option> options = soRepository.findByActiveAndFrontLoad(true, true);
+        List<Option> options = optionRepository.findByActiveAndFrontLoad(true, true);
         Map<String, String> mapOptions = new HashMap<>();
         if (options != null) {
             for (Option option : options) {
@@ -73,7 +73,7 @@ public class OptionServiceImpl implements OptionService {
     @SimpleServiceLog("更新某个系统参数缓存")
     public void updateCertainOptionCache(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
-        Optional<Option> option = soRepository.findByOptionKeyAndActive(optionKey, true);
+        Optional<Option> option = optionRepository.findByOptionKeyAndActive(optionKey, true);
         redis.delete(optionKey);
         if (option.isPresent()) {
             redis.opsForValue().set(optionKey, option.get().getOptionValue());
@@ -93,11 +93,11 @@ public class OptionServiceImpl implements OptionService {
     public void addOption(Option option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
         Assert.notNull(option.getOptionValue(), "参数Value为空");
-        Optional<Option> exists = soRepository.findById(option.getOptionKey());
+        Optional<Option> exists = optionRepository.findById(option.getOptionKey());
         if (exists.isPresent()) {
             throw new SystemException("参数Key已存在");
         } else {
-            soRepository.save(option);
+            optionRepository.save(option);
             log.info("系统参数已添加到数据库");
             self.updateCertainOptionCache(option.getOptionKey());
             if (option.getFrontLoad()) {
@@ -111,7 +111,7 @@ public class OptionServiceImpl implements OptionService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void removeOption(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
-        Optional<Option> option = soRepository.findById(optionKey);
+        Optional<Option> option = optionRepository.findById(optionKey);
         if (option.isPresent()) {
             if (option.get().getBuiltIn()) {
                 throw new SystemException("内置参数无法删除");
@@ -119,7 +119,7 @@ public class OptionServiceImpl implements OptionService {
             if (!option.get().getEditable()) {
                 throw new SystemException("该参数不允许修改，无法删除");
             }
-            soRepository.deleteById(optionKey);
+            optionRepository.deleteById(optionKey);
             log.info("系统参数已从数据库删除");
             self.removeCertainOptionCache(optionKey);
             if (option.get().getFrontLoad()) {
@@ -134,7 +134,7 @@ public class OptionServiceImpl implements OptionService {
     @ServiceLog("修改系统参数")
     public void updateOption(Option option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
-        Optional<Option> oldOption = soRepository.findById(option.getOptionKey());
+        Optional<Option> oldOption = optionRepository.findById(option.getOptionKey());
         if (oldOption.isPresent()) {
             if (!oldOption.get().getEditable()) {
                 throw new SystemException("该参数不允许修改");
@@ -151,7 +151,7 @@ public class OptionServiceImpl implements OptionService {
             }
             Option newOption = oldOption.get();
             EntityRenderUtil.renderNotNullFields(newOption, option);
-            soRepository.save(newOption);
+            optionRepository.save(newOption);
             log.info("系统参数已更新到数据库");
             self.updateCertainOptionCache(newOption.getOptionKey());
             if (newOption.getFrontLoad()) {
