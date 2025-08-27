@@ -55,10 +55,10 @@ public class Api {
     @Column(length = 1024)
     private String description;
 
-    @Column(length = 14000)
+    @Column(length = 4096)
     private String requestSpec;         // 请求规范
 
-    @Column(length = 14000)
+    @Column(length = 4096)
     private String responseSpec;        // 响应规范
 
     @Column(columnDefinition = "bit not null default 0")
