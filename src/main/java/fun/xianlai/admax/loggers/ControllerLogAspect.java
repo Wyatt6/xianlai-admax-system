@@ -78,7 +78,7 @@ public class ControllerLogAspect {
             }
             result.fail().setTraceId(MDC.get("traceId"))
                     .setApisChecksum(apiService.getApisChecksum())
-                    .setSystemOptionsChecksum(optionService.getFrontLoadOptionsChecksum());
+                    .setOptionsChecksum(optionService.getFrontLoadOptionsChecksum());
             logResponseText(result);
             log.info("处理耗时: {}ms", System.currentTimeMillis() - startTimestamp);
             log.info("<<< Exit Controller {}[{}] with Exception", annotationValue, joinPoint.getSignature().getName());
@@ -97,7 +97,7 @@ public class ControllerLogAspect {
     public void controllerFinished(JoinPoint joinPoint, RetResult result) {
         result.setTraceId(MDC.get("traceId"))
                 .setApisChecksum(apiService.getApisChecksum())
-                .setSystemOptionsChecksum(optionService.getFrontLoadOptionsChecksum());
+                .setOptionsChecksum(optionService.getFrontLoadOptionsChecksum());
         logResponseText(result);
     }
 

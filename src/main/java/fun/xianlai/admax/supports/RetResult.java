@@ -44,11 +44,11 @@ public class RetResult {
         return this;
     }
 
-    public RetResult setSystemOptionsChecksum(String systemOptionsChecksum) {
+    public RetResult setOptionsChecksum(String checksum) {
         if (this.data == null) {
-            this.data = new DataMap("systemOptionsChecksum", systemOptionsChecksum);
+            this.data = new DataMap("optionsChecksum", checksum);
         } else {
-            this.data.put("systemOptionsChecksum", systemOptionsChecksum);
+            this.data.put("optionsChecksum", checksum);
         }
         return this;
     }
