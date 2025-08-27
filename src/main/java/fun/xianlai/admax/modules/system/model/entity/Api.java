@@ -61,9 +61,6 @@ public class Api {
     @Column(length = 14000)
     private String responseSpec;        // 响应规范
 
-    @Column
-    private String tag;                 // 打标分类
-
     @Column(columnDefinition = "bit not null default 0")
     private Boolean builtIn;            // 内置参数
 
