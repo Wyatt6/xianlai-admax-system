@@ -48,17 +48,17 @@ public class OptionServiceImpl implements OptionService {
                 mapOptions.put(option.getOptionKey(), option.getOptionValue());
             }
         }
-        redis.opsForValue().set("systemOptionsChecksum", ChecksumUtil.sha256Checksum(JSONObject.toJSONString(mapOptions)));
-        redis.opsForValue().set("systemOptions", mapOptions);
+        redis.opsForValue().set("optionsChecksum", ChecksumUtil.sha256Checksum(JSONObject.toJSONString(mapOptions)));
+        redis.opsForValue().set("options", mapOptions);
     }
 
     @Override
     @SimpleServiceLog("获取允许前端加载的系统参数")
     public Map<String, String> getFrontLoadOptions() {
-        Map<String, String> options = (Map<String, String>) redis.opsForValue().get("systemOptions");
+        Map<String, String> options = (Map<String, String>) redis.opsForValue().get("options");
         if (options == null) {
             self.updateFrontLoadOptionsCache();
-            options = (Map<String, String>) redis.opsForValue().get("systemOptions");
+            options = (Map<String, String>) redis.opsForValue().get("options");
         }
         return options;
     }
@@ -66,7 +66,7 @@ public class OptionServiceImpl implements OptionService {
     @Override
     @SimpleServiceLog("获取允许前端加载的系统参数的checksum")
     public String getFrontLoadOptionsChecksum() {
-        return (String) redis.opsForValue().get("systemOptionsChecksum");
+        return (String) redis.opsForValue().get("optionsChecksum");
     }
 
     @Override
