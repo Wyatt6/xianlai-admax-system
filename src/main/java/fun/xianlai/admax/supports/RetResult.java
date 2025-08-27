@@ -35,6 +35,15 @@ public class RetResult {
         return this;
     }
 
+    public RetResult setApisChecksum(String checksum) {
+        if (this.data == null) {
+            this.data = new DataMap("apisChecksum", checksum);
+        } else {
+            this.data.put("apisChecksum", checksum);
+        }
+        return this;
+    }
+
     public RetResult setSystemOptionsChecksum(String systemOptionsChecksum) {
         if (this.data == null) {
             this.data = new DataMap("systemOptionsChecksum", systemOptionsChecksum);

@@ -52,4 +52,21 @@ public class ApiServiceImpl implements ApiService {
         redis.opsForValue().set("apisChecksum", ChecksumUtil.sha256Checksum(JSONObject.toJSONString(listApis)));
         redis.opsForValue().set("apis", listApis);
     }
+
+    @Override
+    @SimpleServiceLog("更新系统接口缓存")
+    public List<Map<String, Object>> getApis() {
+        List<Map<String, Object>> apis = (List<Map<String, Object>>) redis.opsForValue().get("apis");
+        if (apis == null) {
+            self.updateApisCache();
+            apis = (List<Map<String, Object>>) redis.opsForValue().get("apis");
+        }
+        return apis;
+    }
+
+    @Override
+    @SimpleServiceLog("获取系统接口的checksum")
+    public String getApisChecksum() {
+        return (String) redis.opsForValue().get("apisChecksum");
+    }
 }
