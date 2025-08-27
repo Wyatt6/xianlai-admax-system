@@ -32,6 +32,7 @@ import org.hibernate.annotations.GenericGenerator;
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "tb_system_api", indexes = {
+        @Index(columnList = "callPath", unique = true),
         @Index(columnList = "url", unique = true),
         @Index(columnList = "sortId")
 })
@@ -40,6 +41,9 @@ public class Api {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PK_generator")
     @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
     private Long id;
+
+    @Column(columnDefinition = "varchar(1024) not null")
+    private String callPath;            // 调用路径，如callPath="father.son"在前端可通过Apis.father.son调用接口url访问后端
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(10) not null default 'get'")
