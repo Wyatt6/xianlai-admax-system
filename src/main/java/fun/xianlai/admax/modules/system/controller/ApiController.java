@@ -22,6 +22,14 @@ public class ApiController {
     @Autowired
     private ApiService apiService;
 
+    // TODO 添加访问权限
+    @ControllerLog("更新系统接口缓存")
+    @GetMapping("/updateApisCache")
+    public RetResult updateApisCache() {
+        apiService.updateApisCache();
+        return new RetResult().success();
+    }
+
     @ControllerLog("获取系统接口")
     @GetMapping("/getApis")
     public RetResult getApis() {
