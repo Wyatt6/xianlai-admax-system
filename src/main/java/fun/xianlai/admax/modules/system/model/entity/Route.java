@@ -16,8 +16,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 系统路由
- *  - 内置路由：已在Admax中定义，路由数据由程序SQL自动创建，不允许修改
- *  - 非内置路由：由开发者在二次开发中定义，路由数据由具有权限的用户通过管理台新增和管理
+ * - 内置路由：已在Admax中定义，路由数据由程序SQL自动创建，不允许修改
+ * - 非内置路由：由开发者在二次开发中定义，路由数据由具有权限的用户通过管理台新增和管理
  *
  * @author WyattLau
  */
@@ -44,7 +44,7 @@ public class Route {
     @Column(columnDefinition = "varchar(1024) not null")
     private String path;
 
-    @Column(columnDefinition = "varchar(1024) not null")
+    @Column(length = 1024)
     private String redirect;
 
     @Column(columnDefinition = "varchar(1024) not null")
