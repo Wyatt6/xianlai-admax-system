@@ -7,6 +7,7 @@ import fun.xianlai.admax.modules.system.repository.RouteRepository;
 import fun.xianlai.admax.modules.system.service.RouteService;
 import fun.xianlai.admax.utils.ChecksumUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -27,6 +28,9 @@ public class RouteServiceImpl implements RouteService {
     private RedisTemplate<String, Object> redis;
     @Autowired
     private RouteRepository routeRepository;
+    @Lazy
+    @Autowired
+    private RouteService self;
 
     @Override
     @SimpleServiceLog("更新系统路由缓存")
@@ -36,6 +40,23 @@ public class RouteServiceImpl implements RouteService {
         List<Map<String, Object>> routeForest = getRouteForest(routes);
         redis.opsForValue().set("routesChecksum", ChecksumUtil.sha256Checksum(JSONObject.toJSONString(routeForest)));
         redis.opsForValue().set("routes", routeForest);
+    }
+
+    @Override
+    @SimpleServiceLog("获取系统路由")
+    public List<Map<String, Object>> getRoutes() {
+        List<Map<String, Object>> routes = (List<Map<String, Object>>) redis.opsForValue().get("routes");
+        if (routes == null) {
+            self.updateRoutesCache();
+            routes = (List<Map<String, Object>>) redis.opsForValue().get("routes");
+        }
+        return routes;
+    }
+
+    @Override
+    @SimpleServiceLog("获取系统路由的checksum")
+    public String getRoutesChecksum() {
+        return (String) redis.opsForValue().get("routesChecksum");
     }
 
     private List<Map<String, Object>> getRouteForest(List<Route> routes) {

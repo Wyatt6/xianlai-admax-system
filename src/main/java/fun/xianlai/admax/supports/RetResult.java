@@ -35,6 +35,15 @@ public class RetResult {
         return this;
     }
 
+    public RetResult setOptionsChecksum(String checksum) {
+        if (this.data == null) {
+            this.data = new DataMap("optionsChecksum", checksum);
+        } else {
+            this.data.put("optionsChecksum", checksum);
+        }
+        return this;
+    }
+
     public RetResult setApisChecksum(String checksum) {
         if (this.data == null) {
             this.data = new DataMap("apisChecksum", checksum);
@@ -44,11 +53,11 @@ public class RetResult {
         return this;
     }
 
-    public RetResult setOptionsChecksum(String checksum) {
+    public RetResult setRouteChecksum(String checksum) {
         if (this.data == null) {
-            this.data = new DataMap("optionsChecksum", checksum);
+            this.data = new DataMap("routesChecksum", checksum);
         } else {
-            this.data.put("optionsChecksum", checksum);
+            this.data.put("routesChecksum", checksum);
         }
         return this;
     }
