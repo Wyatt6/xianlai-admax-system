@@ -54,7 +54,7 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    @SimpleServiceLog("更新系统接口缓存")
+    @SimpleServiceLog("获取系统接口")
     public List<Map<String, Object>> getApis() {
         List<Map<String, Object>> apis = (List<Map<String, Object>>) redis.opsForValue().get("apis");
         if (apis == null) {
