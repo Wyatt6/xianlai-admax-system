@@ -35,6 +35,9 @@ public class Route {
     @GenericGenerator(name = "PK_generator", type = PrimaryKeyGenerator.class)
     private Long id;
 
+    @Column(columnDefinition = "bigint not null default 0")
+    private Long parentId;
+
     @Column
     private String name;
 
@@ -46,12 +49,6 @@ public class Route {
 
     @Column(columnDefinition = "varchar(1024) not null")
     private String component;
-
-    @Column
-    private Long firstChild;
-
-    @Column
-    private Long nextBrother;
 
     @Column(columnDefinition = "bigint not null default 0")
     private Long sortId;            // 路由顺序
