@@ -23,7 +23,7 @@ public class OptionController {
     private OptionService optionService;
 
     // TODO 添加访问权限
-    @ControllerLog("更新允许前端加载的系统参数缓存")
+    @ControllerLog("更新允许前端加载的参数缓存")
     @GetMapping("/updateFrontLoadOptionsCache")
     public RetResult updateFrontLoadOptionsCache() {
         optionService.updateFrontLoadOptionsCache();
@@ -31,7 +31,7 @@ public class OptionController {
     }
 
     // TODO 添加访问权限
-    @ControllerLog("更新某个系统参数缓存")
+    @ControllerLog("更新某个参数缓存")
     @GetMapping("/updateCertainOptionCache")
     public RetResult updateCertainOptionCache(@RequestParam("key") String optionKey) {
         optionService.updateCertainOptionCache(optionKey);
@@ -39,14 +39,14 @@ public class OptionController {
     }
 
     // TODO 添加访问权限
-    @ControllerLog("删除某个系统参数缓存")
+    @ControllerLog("删除某个参数缓存")
     @GetMapping("/removeCertainOptionCache")
     public RetResult removeCertainOptionCache(@RequestParam("key") String optionKey) {
         optionService.removeCertainOptionCache(optionKey);
         return new RetResult().success();
     }
 
-    @ControllerLog("获取允许前端访问的系统参数")
+    @ControllerLog("获取允许前端访问的参数")
     @GetMapping("/getOptions")
     public RetResult getOptions() {
         Map<String, Map<String, String>> frontLoad = optionService.getFrontLoadOptions();

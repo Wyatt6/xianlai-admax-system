@@ -15,10 +15,10 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 /**
- * 系统参数
+ * 参数
  * <p>
  * 指用于控制Admax系统或基于Admax二次开发系统运行的参数
- * 按系统参数定义者可以分成两类：
+ * 按参数定义者可以分成两类：
  *      - 内置参数：已在Admax中定义，参数数据由程序SQL自动创建，除了参数值和顺序号，其他属性都不允许修改
  *      - 非内置参数：由开发者在二次开发中定义，参数数据由具有权限的用户通过管理台新增和管理
  *
@@ -41,7 +41,7 @@ public class Option {
     private String optionValue;         // 参数值
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "varchar(20) not null default 'String'")
+    @Column(columnDefinition = "varchar(20) default 'String'")
     private JsType jsType;              // 参数值的js数据类型
 
     @Column(columnDefinition = "bit not null default 0")

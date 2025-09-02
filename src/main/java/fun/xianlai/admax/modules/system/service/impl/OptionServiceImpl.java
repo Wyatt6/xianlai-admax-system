@@ -38,7 +38,7 @@ public class OptionServiceImpl implements OptionService {
     private OptionRepository optionRepository;
 
     @Override
-    @SimpleServiceLog("更新允许前端加载的系统参数缓存")
+    @SimpleServiceLog("更新允许前端加载的参数缓存")
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void updateFrontLoadOptionsCache() {
         List<Option> options = optionRepository.findByActiveAndFrontLoad(true, true);
@@ -56,7 +56,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @SimpleServiceLog("获取允许前端加载的系统参数")
+    @SimpleServiceLog("获取允许前端加载的参数")
     public Map<String, Map<String, String>> getFrontLoadOptions() {
         Map<String, Map<String, String>> options = (Map<String, Map<String, String>>) redis.opsForValue().get("options");
         if (options == null) {
@@ -67,13 +67,13 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @SimpleServiceLog("获取允许前端加载的系统参数的checksum")
+    @SimpleServiceLog("获取允许前端加载的参数的checksum")
     public String getFrontLoadOptionsChecksum() {
         return (String) redis.opsForValue().get("optionsChecksum");
     }
 
     @Override
-    @SimpleServiceLog("更新某个系统参数缓存")
+    @SimpleServiceLog("更新某个参数缓存")
     public void updateCertainOptionCache(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         Optional<Option> option = optionRepository.findByOptionKeyAndActive(optionKey, true);
@@ -84,14 +84,14 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @SimpleServiceLog("删除某个系统参数缓存")
+    @SimpleServiceLog("删除某个参数缓存")
     public void removeCertainOptionCache(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         redis.delete(optionKey);
     }
 
     @Override
-    @ServiceLog("添加系统参数")
+    @ServiceLog("添加参数")
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void addOption(Option option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
@@ -101,7 +101,7 @@ public class OptionServiceImpl implements OptionService {
             throw new SystemException("参数Key已存在");
         } else {
             optionRepository.save(option);
-            log.info("系统参数已添加到数据库");
+            log.info("参数已添加到数据库");
             self.updateCertainOptionCache(option.getOptionKey());
             if (option.getFrontLoad()) {
                 self.updateFrontLoadOptionsCache();
@@ -123,7 +123,7 @@ public class OptionServiceImpl implements OptionService {
                 throw new SystemException("该参数不允许修改，无法删除");
             }
             optionRepository.deleteById(optionKey);
-            log.info("系统参数已从数据库删除");
+            log.info("参数已从数据库删除");
             self.removeCertainOptionCache(optionKey);
             if (option.get().getFrontLoad()) {
                 self.updateFrontLoadOptionsCache();
@@ -134,7 +134,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @ServiceLog("修改系统参数")
+    @ServiceLog("修改参数")
     public void updateOption(Option option) {
         Assert.hasText(option.getOptionKey(), "参数Key为空");
         Optional<Option> oldOption = optionRepository.findById(option.getOptionKey());
@@ -155,7 +155,7 @@ public class OptionServiceImpl implements OptionService {
             Option newOption = oldOption.get();
             EntityRenderUtil.renderNotNullFields(newOption, option);
             optionRepository.save(newOption);
-            log.info("系统参数已更新到数据库");
+            log.info("参数已更新到数据库");
             self.updateCertainOptionCache(newOption.getOptionKey());
             if (newOption.getFrontLoad()) {
                 self.updateFrontLoadOptionsCache();
@@ -166,7 +166,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @SimpleServiceLog("根据Key获取系统参数值")
+    @SimpleServiceLog("根据Key获取参数值")
     public String getActiveOptionValue(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         String value = (String) redis.opsForValue().get(optionKey);
@@ -179,7 +179,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @SimpleServiceLog("以String类型读取系统参数值")
+    @SimpleServiceLog("以String类型读取参数值")
     public Optional<String> readOptionValueForString(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         String value = self.getActiveOptionValue(optionKey);
@@ -187,7 +187,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @SimpleServiceLog("以Integer类型读取系统参数值")
+    @SimpleServiceLog("以Integer类型读取参数值")
     public Optional<Integer> readOptionValueForInteger(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         String value = self.getActiveOptionValue(optionKey);
@@ -195,7 +195,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @SimpleServiceLog("以Long类型读取系统参数值")
+    @SimpleServiceLog("以Long类型读取参数值")
     public Optional<Long> readOptionValueForLong(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         String value = self.getActiveOptionValue(optionKey);
@@ -203,7 +203,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @SimpleServiceLog("以Boolean类型读取系统参数值")
+    @SimpleServiceLog("以Boolean类型读取参数值")
     public Boolean readOptionValueForBoolean(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
         String value = self.getActiveOptionValue(optionKey);
