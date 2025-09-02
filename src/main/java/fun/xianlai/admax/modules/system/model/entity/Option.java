@@ -1,7 +1,10 @@
 package fun.xianlai.admax.modules.system.model.entity;
 
+import fun.xianlai.admax.modules.system.model.enums.JsType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
@@ -36,6 +39,10 @@ public class Option {
 
     @Column(columnDefinition = "varchar(14000) not null")
     private String optionValue;         // 参数值
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(20) not null default 'String'")
+    private JsType jsType;              // 参数值的js数据类型
 
     @Column(columnDefinition = "bit not null default 0")
     private Boolean active;

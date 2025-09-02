@@ -42,10 +42,13 @@ public class OptionServiceImpl implements OptionService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void updateFrontLoadOptionsCache() {
         List<Option> options = optionRepository.findByActiveAndFrontLoad(true, true);
-        Map<String, String> mapOptions = new HashMap<>();
+        Map<String, Map<String, String>> mapOptions = new HashMap<>();
         if (options != null) {
             for (Option option : options) {
-                mapOptions.put(option.getOptionKey(), option.getOptionValue());
+                Map<String, String> valueObject = new HashMap<>();
+                valueObject.put("value", option.getOptionValue());
+                valueObject.put("type", option.getJsType().toString());
+                mapOptions.put(option.getOptionKey(), valueObject);
             }
         }
         redis.opsForValue().set("optionsChecksum", ChecksumUtil.sha256Checksum(JSONObject.toJSONString(mapOptions)));
@@ -54,11 +57,11 @@ public class OptionServiceImpl implements OptionService {
 
     @Override
     @SimpleServiceLog("获取允许前端加载的系统参数")
-    public Map<String, String> getFrontLoadOptions() {
-        Map<String, String> options = (Map<String, String>) redis.opsForValue().get("options");
+    public Map<String, Map<String, String>> getFrontLoadOptions() {
+        Map<String, Map<String, String>> options = (Map<String, Map<String, String>>) redis.opsForValue().get("options");
         if (options == null) {
             self.updateFrontLoadOptionsCache();
-            options = (Map<String, String>) redis.opsForValue().get("options");
+            options = (Map<String, Map<String, String>>) redis.opsForValue().get("options");
         }
         return options;
     }

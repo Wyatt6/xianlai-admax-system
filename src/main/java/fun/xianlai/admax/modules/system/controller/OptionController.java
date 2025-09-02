@@ -49,7 +49,7 @@ public class OptionController {
     @ControllerLog("获取允许前端访问的系统参数")
     @GetMapping("/getOptions")
     public RetResult getOptions() {
-        Map<String, String> frontLoad = optionService.getFrontLoadOptions();
+        Map<String, Map<String, String>> frontLoad = optionService.getFrontLoadOptions();
         // 不需要调用getFrontLoadOptionsChecksum()获取checksum
         // 在ControllerLog中已经对每个响应自动调用并封装到data.optionsChecksum
         // String frontLoadChecksum = optionService.getFrontLoadOptionsChecksum();

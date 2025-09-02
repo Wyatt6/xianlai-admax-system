@@ -17,7 +17,7 @@ public interface OptionService {
     /**
      * 获取允许前端加载的系统参数
      */
-    Map<String, String> getFrontLoadOptions();
+    Map<String, Map<String, String>> getFrontLoadOptions();
 
     /**
      * 获取允许前端加载的系统参数的checksum
