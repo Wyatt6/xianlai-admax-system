@@ -62,9 +62,6 @@ public class Api {
     private String responseSpec;        // 响应规范
 
     @Column(columnDefinition = "bit not null default 0")
-    private Boolean builtIn;            // 内置参数
-
-    @Column(columnDefinition = "bit not null default 0")
     private Boolean active;
 
     @Column(columnDefinition = "bigint not null default 0")
