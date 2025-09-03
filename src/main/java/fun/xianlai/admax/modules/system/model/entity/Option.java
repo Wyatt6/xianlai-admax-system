@@ -42,7 +42,7 @@ public class Option {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(20) default 'String'")
-    private JsType jsType;              // 参数值的js数据类型
+    private JsType jsType;              // 参数值的js数据类型（frontLoad = true才有意义）
 
     @Column(columnDefinition = "bit not null default 0")
     private Boolean active;
@@ -60,7 +60,7 @@ public class Option {
     private Boolean editable;           // 是否允许修改（即使是内置参数也要editable才允许修改optionValue和sortId）
 
     @Column(columnDefinition = "bit not null default 0")
-    private Boolean frontLoad;          // 是否允许前端加载
+    private Boolean frontLoad;          // 是否加载到前端
 
     @Column(columnDefinition = "bigint not null default 0")
     private Long sortId;
