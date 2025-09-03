@@ -62,6 +62,9 @@ public class Option {
     @Column(columnDefinition = "bit not null default 0")
     private Boolean frontLoad;          // 是否加载到前端
 
+    @Column(columnDefinition = "bit not null default 0")
+    private Boolean backLoad;           // 是否加载到后端
+
     @Column(columnDefinition = "bigint not null default 0")
     private Long sortId;
 }

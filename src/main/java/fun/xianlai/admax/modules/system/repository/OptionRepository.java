@@ -14,5 +14,7 @@ import java.util.Optional;
 public interface OptionRepository extends JpaRepository<Option, String> {
     List<Option> findByActiveAndFrontLoad(Boolean active, Boolean frontLoad);
 
+    List<Option> findByActiveAndBackLoad(Boolean active, Boolean backLoad);
+
     Optional<Option> findByOptionKeyAndActive(String optionKey, Boolean active);
 }
