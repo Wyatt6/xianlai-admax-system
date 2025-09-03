@@ -2,14 +2,18 @@ package fun.xianlai.admax.supports;
 
 import lombok.Getter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author WyattLau
  */
 @Getter
 public class RetResult {
-    private Boolean success;    // true - 成功 / false - 失败
-    private DataMap data;       // 返回数据
-    private String traceId;     // 日志跟踪ID
+    private Boolean success;                // true - 成功 / false - 失败
+    private DataMap data;                   // 返回数据
+    private String traceId;                 // 日志跟踪ID
+    private Map<String, String> checksum;   // 各种数据的checksum集合
 
     public RetResult() {
         this.success = false;   // 出于安全考量，构造函数中默认设置success标记为false（失败）
@@ -36,29 +40,10 @@ public class RetResult {
     }
 
     public RetResult setOptionsChecksum(String checksum) {
-        if (this.data == null) {
-            this.data = new DataMap("optionsChecksum", checksum);
-        } else {
-            this.data.put("optionsChecksum", checksum);
+        if (this.checksum == null) {
+            this.checksum = new HashMap<>();
         }
-        return this;
-    }
-
-    public RetResult setApisChecksum(String checksum) {
-        if (this.data == null) {
-            this.data = new DataMap("apisChecksum", checksum);
-        } else {
-            this.data.put("apisChecksum", checksum);
-        }
-        return this;
-    }
-
-    public RetResult setRouteChecksum(String checksum) {
-        if (this.data == null) {
-            this.data = new DataMap("routesChecksum", checksum);
-        } else {
-            this.data.put("routesChecksum", checksum);
-        }
+        this.checksum.put("options", checksum);
         return this;
     }
 
