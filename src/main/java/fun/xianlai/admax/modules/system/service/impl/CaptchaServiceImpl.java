@@ -70,8 +70,8 @@ public class CaptchaServiceImpl implements CaptchaService {
     @ServiceLog("生成验证码")
     public DataMap generateCaptcha() {
         try {
-            Integer length = optionService.readOptionValueForInteger("sys.captcha.length").orElse(5);
-            Integer expireSeconds = optionService.readOptionValueForInteger("sys.captcha.expireSeconds").orElse(60);
+            Integer length = optionService.readOptionValueForInteger("captcha.length").orElse(5);
+            Integer expireSeconds = optionService.readOptionValueForInteger("captcha.expireSeconds").orElse(60);
 
             Producer producer = getKaptchaProducer(String.valueOf(length));
             // 生成验证码KEY、验证码文本，并缓存到Redis
