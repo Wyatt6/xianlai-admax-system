@@ -1,6 +1,7 @@
 package fun.xianlai.admax.modules.system.service;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author WyattLau
@@ -26,11 +27,21 @@ public interface OptionService {
      */
     void updateBackLoadOptionCache();
 
-//    /**
-//     * 更新某个参数缓存
-//     */
-//    void updateCertainOptionCache(String optionKey);
-//
+    /**
+     * 更新某个加载到后端的参数缓存
+     */
+    void updateCertainBackLoadOptionCache(String optionKey);
+
+    /**
+     * 获取某个加载到后端的参数值
+     */
+    String getCertainBackLoadOptionValue(String optionKey);
+
+    /**
+     * 以Integer类型读取参数值
+     */
+    Optional<Integer> readOptionValueForInteger(String optionKey);
+
 //    /**
 //     * 删除某个参数缓存
 //     */
@@ -52,21 +63,11 @@ public interface OptionService {
 //     * @param option 参数Key必须，其他要修改的属性非空
 //     */
 //    void updateOption(Option option);
-//
-//    /**
-//     * 根据Key获取参数值
-//     */
-//    String getActiveOptionValue(String optionKey);
-//
 //    /**
 //     * 以String类型读取参数值
 //     */
 //    Optional<String> readOptionValueForString(String optionKey);
 //
-//    /**
-//     * 以Integer类型读取参数值
-//     */
-//    Optional<Integer> readOptionValueForInteger(String optionKey);
 //
 //    /**
 //     * 以Long类型读取参数值

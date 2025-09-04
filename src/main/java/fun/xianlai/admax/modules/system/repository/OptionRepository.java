@@ -16,5 +16,5 @@ public interface OptionRepository extends JpaRepository<Option, String> {
 
     List<Option> findByActiveAndBackLoad(Boolean active, Boolean backLoad);
 
-    Optional<Option> findByOptionKeyAndActive(String optionKey, Boolean active);
+    Optional<Option> findByOptionKeyAndActiveAndBackLoad(String optionKey, Boolean active, Boolean backLoad);
 }

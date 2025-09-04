@@ -13,11 +13,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author WyattLau
@@ -82,17 +84,38 @@ public class OptionServiceImpl implements OptionService {
         }
     }
 
-//    @Override
-//    @SimpleServiceLog("更新某个参数缓存")
-//    public void updateCertainOptionCache(String optionKey) {
-//        Assert.hasText(optionKey, "参数Key为空");
-//        Optional<Option> option = optionRepository.findByOptionKeyAndActive(optionKey, true);
-//        redis.delete(optionKey);
-//        if (option.isPresent()) {
-//            redis.opsForValue().set(optionKey, option.get().getOptionValue());
-//        }
-//    }
-//
+    @Override
+    @SimpleServiceLog("更新某个加载到后端的参数缓存")
+    public void updateCertainBackLoadOptionCache(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        Optional<Option> option = optionRepository.findByOptionKeyAndActiveAndBackLoad(optionKey, true, true);
+        redis.delete(CACHE_PREFIX + optionKey);
+        if (option.isPresent()) {
+            redis.opsForValue().set(CACHE_PREFIX + optionKey, option.get().getOptionValue(), Duration.ofHours(CACHE_HOURS));
+        }
+    }
+
+    @Override
+    @SimpleServiceLog("获取某个加载到后端的参数值")
+    public String getCertainBackLoadOptionValue(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        String value = (String) redis.opsForValue().get(CACHE_PREFIX + optionKey);
+        if (value != null) {
+            return value;
+        } else {
+            self.updateCertainBackLoadOptionCache(optionKey);
+            return (String) redis.opsForValue().get(CACHE_PREFIX + optionKey);
+        }
+    }
+
+    @Override
+    @SimpleServiceLog("以Integer类型读取参数值")
+    public Optional<Integer> readOptionValueForInteger(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        String value = self.getCertainBackLoadOptionValue(optionKey);
+        return value != null ? ((Integer) Integer.parseInt(value)).describeConstable() : Optional.empty();
+    }
+
 //    @Override
 //    @SimpleServiceLog("删除某个参数缓存")
 //    public void removeCertainOptionCache(String optionKey) {
@@ -174,20 +197,6 @@ public class OptionServiceImpl implements OptionService {
 //            throw new SystemException("参数不存在");
 //        }
 //    }
-//
-//    @Override
-//    @SimpleServiceLog("根据Key获取参数值")
-//    public String getActiveOptionValue(String optionKey) {
-//        Assert.hasText(optionKey, "参数Key为空");
-//        String value = (String) redis.opsForValue().get(optionKey);
-//        if (value != null) {
-//            return value;
-//        } else {
-//            self.updateCertainOptionCache(optionKey);
-//            return (String) redis.opsForValue().get(optionKey);
-//        }
-//    }
-//
 //    @Override
 //    @SimpleServiceLog("以String类型读取参数值")
 //    public Optional<String> readOptionValueForString(String optionKey) {
@@ -196,13 +205,6 @@ public class OptionServiceImpl implements OptionService {
 //        return value != null ? value.describeConstable() : Optional.empty();
 //    }
 //
-//    @Override
-//    @SimpleServiceLog("以Integer类型读取参数值")
-//    public Optional<Integer> readOptionValueForInteger(String optionKey) {
-//        Assert.hasText(optionKey, "参数Key为空");
-//        String value = self.getActiveOptionValue(optionKey);
-//        return value != null ? ((Integer) Integer.parseInt(value)).describeConstable() : Optional.empty();
-//    }
 //
 //    @Override
 //    @SimpleServiceLog("以Long类型读取参数值")
