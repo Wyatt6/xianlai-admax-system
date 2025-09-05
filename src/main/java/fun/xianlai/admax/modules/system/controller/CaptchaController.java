@@ -19,7 +19,7 @@ public class CaptchaController {
     @Autowired
     private CaptchaService captchaService;
 
-    @ControllerLog("获取验证码")
+    @ControllerLog("获取验证码API")
     @GetMapping("/getCaptcha")
     public RetResult getCaptcha() {
         // {captchaKey 验证码KEY, captchaImage 验证码Base64图像}

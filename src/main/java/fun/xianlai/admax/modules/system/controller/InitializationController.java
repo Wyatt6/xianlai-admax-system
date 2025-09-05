@@ -21,7 +21,7 @@ public class InitializationController {
     @Autowired
     private OptionService optionService;
 
-    @ControllerLog("获取初始化数据")
+    @ControllerLog("获取初始化数据API")
     @GetMapping("/getInitData")
     public RetResult getInitData() {
         Map<String, Map<String, String>> options = optionService.getFrontLoadOptions();
