@@ -38,6 +38,11 @@ public interface OptionService {
     String getCertainBackLoadOptionValue(String optionKey);
 
     /**
+     * 以String类型读取参数值
+     */
+    Optional<String> readOptionValueForString(String optionKey);
+
+    /**
      * 以Integer类型读取参数值
      */
     Optional<Integer> readOptionValueForInteger(String optionKey);
@@ -63,10 +68,7 @@ public interface OptionService {
 //     * @param option 参数Key必须，其他要修改的属性非空
 //     */
 //    void updateOption(Option option);
-//    /**
-//     * 以String类型读取参数值
-//     */
-//    Optional<String> readOptionValueForString(String optionKey);
+
 //
 //
 //    /**

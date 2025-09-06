@@ -109,6 +109,14 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
+    @SimpleServiceLog("以String类型读取参数值")
+    public Optional<String> readOptionValueForString(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        String value = self.getCertainBackLoadOptionValue(optionKey);
+        return value != null ? value.describeConstable() : Optional.empty();
+    }
+
+    @Override
     @SimpleServiceLog("以Integer类型读取参数值")
     public Optional<Integer> readOptionValueForInteger(String optionKey) {
         Assert.hasText(optionKey, "参数Key为空");
@@ -197,14 +205,6 @@ public class OptionServiceImpl implements OptionService {
 //            throw new SystemException("参数不存在");
 //        }
 //    }
-//    @Override
-//    @SimpleServiceLog("以String类型读取参数值")
-//    public Optional<String> readOptionValueForString(String optionKey) {
-//        Assert.hasText(optionKey, "参数Key为空");
-//        String value = self.getActiveOptionValue(optionKey);
-//        return value != null ? value.describeConstable() : Optional.empty();
-//    }
-//
 //
 //    @Override
 //    @SimpleServiceLog("以Long类型读取参数值")

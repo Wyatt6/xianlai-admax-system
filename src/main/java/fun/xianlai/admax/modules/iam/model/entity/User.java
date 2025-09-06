@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -94,4 +95,10 @@ public class User {
     @Convert(converter = MapAndJsonConverter.class)
     @Column(columnDefinition = "json")
     private Map<String, String> more;
+
+    // ----- 非持久化属性 -----
+    @Transient
+    private String captchaKey;  // 验证码KEY
+    @Transient
+    private String captcha;     // 验证码
 }
