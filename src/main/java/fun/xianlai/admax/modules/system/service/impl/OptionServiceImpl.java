@@ -124,6 +124,14 @@ public class OptionServiceImpl implements OptionService {
         return value != null ? ((Integer) Integer.parseInt(value)).describeConstable() : Optional.empty();
     }
 
+    @Override
+    @SimpleServiceLog("以Long类型读取参数值")
+    public Optional<Long> readOptionValueForLong(String optionKey) {
+        Assert.hasText(optionKey, "参数Key为空");
+        String value = self.getCertainBackLoadOptionValue(optionKey);
+        return value != null ? ((Long) Long.parseLong(value)).describeConstable() : Optional.empty();
+    }
+
 //    @Override
 //    @SimpleServiceLog("删除某个参数缓存")
 //    public void removeCertainOptionCache(String optionKey) {
@@ -204,14 +212,6 @@ public class OptionServiceImpl implements OptionService {
 //        } else {
 //            throw new SystemException("参数不存在");
 //        }
-//    }
-//
-//    @Override
-//    @SimpleServiceLog("以Long类型读取参数值")
-//    public Optional<Long> readOptionValueForLong(String optionKey) {
-//        Assert.hasText(optionKey, "参数Key为空");
-//        String value = self.getActiveOptionValue(optionKey);
-//        return value != null ? ((Long) Long.parseLong(value)).describeConstable() : Optional.empty();
 //    }
 //
 //    @Override

@@ -47,6 +47,11 @@ public interface OptionService {
      */
     Optional<Integer> readOptionValueForInteger(String optionKey);
 
+    /**
+     * 以Long类型读取参数值
+     */
+    Optional<Long> readOptionValueForLong(String optionKey);
+
 //    /**
 //     * 删除某个参数缓存
 //     */
@@ -68,13 +73,6 @@ public interface OptionService {
 //     * @param option 参数Key必须，其他要修改的属性非空
 //     */
 //    void updateOption(Option option);
-
-//
-//
-//    /**
-//     * 以Long类型读取参数值
-//     */
-//    Optional<Long> readOptionValueForLong(String optionKey);
 //
 //    /**
 //     * 以Boolean类型读取参数值
