@@ -28,7 +28,11 @@ public class MapAndJsonConverter implements AttributeConverter<Map<String, Objec
     @Override
     public Map<String, Object> convertToEntityAttribute(String dbData) {
         try {
-            return objectMapper.readValue(dbData, Map.class);
+            if (dbData == null) {
+                return null;
+            }else {
+                return objectMapper.readValue(dbData, Map.class);
+            }
         } catch (JsonProcessingException e) {
             throw new RuntimeException("无法将数据库JSON类型读取为Map对象", e);
         }
